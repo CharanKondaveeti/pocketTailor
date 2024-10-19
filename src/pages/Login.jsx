@@ -1,4 +1,5 @@
 import { useState } from "react";
+import MeasurementsInput from "./MeasurementsInput";
 // import { useHistory } from "react-router-dom";
 
 const Login = () => {
@@ -38,6 +39,7 @@ const Login = () => {
 
         <button type="submit">Login</button>
       </form>
+      <MeasurementsInput label="Shoulder Width" />
     </div>
   );
 };
