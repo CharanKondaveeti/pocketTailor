@@ -3,7 +3,7 @@ import "./App.css";
 import Login from "./pages/Login";
 import HomePage from "./pages/HomePage";
 import Profile from "./pages/Profile/Profile";
-
+import OrderPage from "./pages/OrderPage/OrderPage";
 import ViewCustomers from "./pages/ViewCustomers/ViewCustomers";
 import AddClient from "./pages/AddClient/AddClient";
 
@@ -20,6 +20,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/homepage" element={<HomePage />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/order" element={<OrderPage/>} />
 
           <Route path="/view" element={<ViewCustomers />} />
           <Route path="/add-client" element={<AddClient />} />
