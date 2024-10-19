@@ -24,67 +24,77 @@
   background-color: #007bff;
   color: white;
 }
+.profilephoto-card{
+  flex-direction: column;
+}
 
 .details-card {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
-  flex-direction: column; /* Stack elements vertically */
-  align-items: flex-start; /* Align items to the start */
+  /* flex-direction: column;
+  align-items: flex-start;  */
 }
 
 .profile {
-  display: flex; /* Flex container for photo and info */
-  align-items: center; /* Center items vertically */
-  margin-bottom: 10px; /* Space below the profile section */
+  display: flex;
+  align-items: center; 
+  margin-bottom: 20px; 
 }
 
 .profile-photo {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  margin-right: 15px; /* Space between photo and personal info */
+  margin-right: 15px; 
   object-fit: cover;
 }
 
 .personal-info {
   display: flex;
-  flex-direction: column; /* Stack text vertically */
+  flex-direction: column; 
 }
 
 .icon-container {
   display: flex;
-  margin-top: 8px; /* Space between profile and icons */
+  margin-top: 8px; 
+  margin-left:14px;
 }
 
 .icon {
-  margin-right: 10px; /* Space between icons */
-  cursor: pointer; /* Change cursor to pointer for click action */
-  font-size: 20px; /* Adjust size as needed */
-  color: #555; /* Icon color */
+  margin-right: 10px; 
+  cursor: pointer; 
+  font-size: 20px; 
+  color: #555; 
 }
 
 .edit-icon:hover {
-  color: #4CAF50; /* Change color on hover for edit icon */
+  color: #4CAF50; 
 }
 
 .delete-icon:hover {
-  color: #F44336; /* Change color on hover for delete icon */
+  color: #F44336; 
 }
 
 .personal-info h2 {
-  margin: 0; /* Remove default margin */
-  font-size: 22px; /* Font size for name */
-  font-weight: bold; /* Bold font for name */
+  margin: 0; 
+  font-size: 22px; 
+  font-weight: bold; 
+  margin-left: 4px;
 }
 
 .personal-info p {
-  margin: 2px 0; /* Margin for paragraphs */
-  color: #6c757d; /* Color for the text */
+  margin: 2px 0; 
+  color: #6c757d; 
+  font-size: 18px;
+  margin-left:4px;
+}
+.card{
+  margin-left: 10px;
 }
 
-/* Additional styles */
+
 .measurements,
 .orders {
   margin-top: 10px;
