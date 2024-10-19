@@ -1,15 +1,14 @@
 .profile-container {
-    
-  max-width: 40rem;
-  margin:0 auto;
-  padding: 2rem;
+  max-width: 400px;
+  margin: 0 auto;
+  font-family: 'Arial', sans-serif;
   background-color: #f8f9fa;
 }
 
 .top {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 2rem;
+  margin-bottom: 20px;
 }
 
 .back,
@@ -21,79 +20,71 @@
   cursor: pointer;
 }
 
-
-
-.create-order{
+.create-order {
   background-color: #007bff;
   color: white;
 }
-.profilephoto-card{
-  flex-direction: column;
-}
-
 
 .details-card {
-  /* background-color: white; */
-  padding: 2rem;
+  padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display:flex;
- 
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: flex-start; /* Align items to the start */
 }
 
 .profile {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-  
+  display: flex; /* Flex container for photo and info */
+  align-items: center; /* Center items vertically */
+  margin-bottom: 10px; /* Space below the profile section */
 }
 
 .profile-photo {
-  width: 8rem;
-  height: 8rem;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
-  margin-right: 15px;
+  margin-right: 15px; /* Space between photo and personal info */
   object-fit: cover;
 }
+
+.personal-info {
+  display: flex;
+  flex-direction: column; /* Stack text vertically */
+}
+
 .icon-container {
   display: flex;
-  margin-top: 8px;
-  margin-left:14px;
+  margin-top: 8px; /* Space between profile and icons */
 }
+
 .icon {
-  margin-right: 10px; 
-  cursor: pointer;
-  font-size: 20px; 
-  color: #555; 
+  margin-right: 10px; /* Space between icons */
+  cursor: pointer; /* Change cursor to pointer for click action */
+  font-size: 20px; /* Adjust size as needed */
+  color: #555; /* Icon color */
 }
+
 .edit-icon:hover {
-  color: #4CAF50;
+  color: #4CAF50; /* Change color on hover for edit icon */
 }
+
 .delete-icon:hover {
-  color: #F44336; 
+  color: #F44336; /* Change color on hover for delete icon */
 }
-.personal-info {
-display: flex;
-flex-direction:column; 
-}
+
 .personal-info h2 {
- margin: 0;
-  font-size: 22px;
-  font-weight: bold;
-  margin-left:4rem;
+  margin: 0; /* Remove default margin */
+  font-size: 22px; /* Font size for name */
+  font-weight: bold; /* Bold font for name */
 }
 
 .personal-info p {
-  margin: 2px 0;
-  color:black;
-  font-size:18px;
-  margin-left:4rem;
+  margin: 2px 0; /* Margin for paragraphs */
+  color: #6c757d; /* Color for the text */
 }
 
-.card {
-  margin-left:10px;
-} 
-
+/* Additional styles */
 .measurements,
 .orders {
   margin-top: 10px;
@@ -102,9 +93,9 @@ flex-direction:column;
   border: 2px solid grey;
   padding: 8px;
   border-radius: 8px;
-  display:flex;
-  justify-content:space-between;
-  color:grey;
+  display: flex;
+  justify-content: space-between;
+  color: grey;
 }
 
 h3 {
@@ -114,7 +105,6 @@ h3 {
 
 .view-button {
   padding: 8px 15px; 
-  
   background-color: white;
   color: blue;
   border: 2px solid rgb(107, 107, 224);
