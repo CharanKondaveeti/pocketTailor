@@ -51,7 +51,7 @@
 }
 
 .wheel-picker {
-  height: 12rem; /* Adjust height as needed */
+  height: 8rem !important; /* Adjust height as needed */
   overflow: hidden; /* Hide overflow */
   position: relative; /* Necessary for proper positioning */
   outline: none; /* Remove default focus outline */
