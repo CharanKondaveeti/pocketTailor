@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import "./Experiments.css";
 
-const Experiments = ({ options }) => {
+const Experiments = ({ options, onChange }) => {
   const [selectedIndex, setSelectedIndex] = useState(2); // Start with the third item highlighted
   const [isDragging, setIsDragging] = useState(false);
   const [startY, setStartY] = useState(0);
-  const itemHeight = 40; // Height of each item in pixels
+
+  const itemHeight = 32; // Height of each item in pixels (adjusted based on CSS)
 
   const handleMouseDown = (event) => {
     event.preventDefault();
@@ -25,13 +26,15 @@ const Experiments = ({ options }) => {
       const offset = startY - currentY;
 
       if (offset > itemHeight && selectedIndex < options.length - 1) {
-        setSelectedIndex((prevIndex) =>
-          Math.min(prevIndex + 1, options.length - 1)
-        );
+        const newIndex = Math.min(selectedIndex + 1, options.length - 1);
+        setSelectedIndex(newIndex);
         setStartY(currentY);
+        onChange(options[newIndex]); // Call onChange with the new value
       } else if (offset < -itemHeight && selectedIndex > 0) {
-        setSelectedIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+        const newIndex = Math.max(selectedIndex - 1, 0);
+        setSelectedIndex(newIndex);
         setStartY(currentY);
+        onChange(options[newIndex]); // Call onChange with the new value
       }
     }
   };
@@ -42,13 +45,15 @@ const Experiments = ({ options }) => {
       const offset = startY - currentY;
 
       if (offset > itemHeight && selectedIndex < options.length - 1) {
-        setSelectedIndex((prevIndex) =>
-          Math.min(prevIndex + 1, options.length - 1)
-        );
+        const newIndex = Math.min(selectedIndex + 1, options.length - 1);
+        setSelectedIndex(newIndex);
         setStartY(currentY);
+        onChange(options[newIndex]); // Call onChange with the new value
       } else if (offset < -itemHeight && selectedIndex > 0) {
-        setSelectedIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+        const newIndex = Math.max(selectedIndex - 1, 0);
+        setSelectedIndex(newIndex);
         setStartY(currentY);
+        onChange(options[newIndex]); // Call onChange with the new value
       }
     }
   };
@@ -71,12 +76,12 @@ const Experiments = ({ options }) => {
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      style={{ touchAction: "none" }} // Prevent default touch actions
+      style={{ touchAction: "none" }}
     >
       <div
         className="wheel-picker-list"
         style={{
-          transform: `translateY(-${(selectedIndex - 1) * itemHeight}px)`, // Adjust so that the center item is the highlighted one
+          transform: `translateY(-${(selectedIndex - 1) * itemHeight}px)`,
           transition: isDragging ? "none" : "transform 0.3s ease-out",
         }}
       >

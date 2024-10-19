@@ -1,83 +1,55 @@
-/* wheel-picker.css */
-
 .wheel-picker {
-  width: 7rem; /* Adjust width as needed */
-  height: 200px; /* Adjust height as needed */
-  overflow: hidden; /* Hide overflowing content */
+  width: 4rem;
+  height: 6rem;
+  overflow: hidden;
   border: 1px solid #ccc;
   border-radius: 5px;
-  cursor: pointer; /* Indicate draggable area */
-  position: relative; /* Necessary for applying styles to child elements */
-}
-
-.wheel-picker-list {
-  display: flex; /* Allow items to stack vertically */
-  flex-direction: column; /* Arrange items vertically */
-  position: absolute; /* Position the list within the wheel picker */
-  top: 0; /* Align the list at the top */
-  left: 0; /* Align the list at the left */
-  width: 100%; /* Fill the entire width of the wheel picker */
-  height: 100%; /* Fill the entire height of the wheel picker */
-  transition: transform 0.3s ease-out; /* Smooth scrolling animation */
-}
-
-.wheel-picker-item {
-  line-height: 40px; /* Adjust line-height as needed */
-  text-align: center;
-  cursor: pointer; /* Indicate draggable area within items */
-  color: #333; /* Set text color */
-  background-color: #f0f0f0; /* Set background color */
-  transition: all 0.2s ease-in-out; /* Smooth styling changes */
-}
-
-.wheel-picker-item.active {
-  font-weight: bold; /* Make selected item bold */
-  background-color: #ddd; /* Highlight selected item */
-}
-
-.wheel-picker-item.highlighted {
-  font-size: 1.2em; /* Increase font size for highlighted item (if needed) */
-}
-
-/* Optional styling for dragging feedback (replace with your desired styles) */
-
-.wheel-picker:active .wheel-picker-list {
-  transition: none; /* Disable transition during drag for better responsiveness */
-}
-
-/* (Optional) Add visual indicator for dragging (e.g., background color change) */
-.wheel-picker:active {
-  background-color: #eee; /* Optional visual feedback during drag */
-}
-
-.wheel-picker {
-  height: 8rem !important; /* Adjust height as needed */
-  overflow: hidden; /* Hide overflow */
-  position: relative; /* Necessary for proper positioning */
-  outline: none; /* Remove default focus outline */
+  cursor: pointer;
+  position: relative;
+  outline: none;
 }
 
 .wheel-picker:focus {
-  outline: none; /* Remove outline when focused */
+  outline: none;
 }
 
 .wheel-picker-list {
-  position: relative; /* Necessary for proper positioning */
-  transition: transform 0.3s ease-out; /* Smooth transition for scrolling */
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease-out;
 }
 
 .wheel-picker-item {
-  height: 40px; /* Height of each item */
+  padding: 0.3rem 0;
   display: flex;
-  align-items: center; /* Center text vertically */
-  justify-content: center; /* Center text horizontally */
-  transition: transform 0.3s, font-size 0.3s; /* Smooth transition for scaling */
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s, font-size 0.3s;
 }
 
 .wheel-picker-item.active {
-  font-size: 24px; /* Increase font size for active item */
-  color: #007bff; /* Change color for the active item */
-  transform: scale(1.1); /* Slightly scale the active item */
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #007bff;
+  background-color: #ddd;
+  transform: scale(1.1);
+}
+
+.wheel-picker-item.highlighted {
+  font-size: 1.2em;
+}
+
+.wheel-picker:active .wheel-picker-list {
+  transition: none;
+}
+
+.wheel-picker:active {
+  background-color: #eee;
 }
 
 .scroll-input {
