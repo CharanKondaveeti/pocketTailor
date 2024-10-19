@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect }
+ from 'react';
+ import { useNavigate } from 'react-router-dom';
 import './ViewCustomers.css'
 const ViewCustomers = () => {
   const [customers, setCustomers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-
+  const navigate = useNavigate();
  
   const jsonData = [
     { id: 1, name: 'John Doe', phone: '1234567890', gender: 'Male' },
@@ -45,7 +47,7 @@ const ViewCustomers = () => {
     setCustomers(jsonData);
   }, []);
   const AddClient=()=>{
-    Navigate()
+    navigate('/add-client');
 
   }
 
@@ -66,7 +68,7 @@ const ViewCustomers = () => {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-        <button onclick={AddClient}>+ Add Client</button>
+        <button onClick={AddClient}>+ Add Client</button>
       </div>
 
       <table>
