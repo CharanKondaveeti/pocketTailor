@@ -81,14 +81,14 @@
   margin: 0; 
   font-size: 22px; 
   font-weight: bold; 
-  margin-left: 4px;
+  margin-left: 40px;
 }
 
 .personal-info p {
   margin: 2px 0; 
-  color: #6c757d; 
+  color:black; 
   font-size: 18px;
-  margin-left:4px;
+  margin-left:40px;
 }
 .card{
   margin-left: 10px;

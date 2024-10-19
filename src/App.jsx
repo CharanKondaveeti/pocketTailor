@@ -3,6 +3,8 @@ import "./App.css";
 import Login from "./pages/Login";
 import HomePage from "./pages/HomePage";
 import Profile from "./pages/Profile/Profile";
+import ViewCustomers from "./pages/ViewCustomers/ViewCustomers";
+import AddClient from "./pages/AddClient/AddClient";
 function App() {
   return (
     <Router>
@@ -11,6 +13,8 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/view" element={<ViewCustomers />} />
+          <Route path="/add" element={<AddClient />} />
         </Routes>
       </div>
     </Router>

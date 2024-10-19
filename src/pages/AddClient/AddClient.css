@@ -1,0 +1,10 @@
+.newclient-top{
+    display:flex;
+   
+    
+}
+.newclient-top h3{
+    margin: 0;                   
+    flex: 1;   
+    text-align:center;
+}
