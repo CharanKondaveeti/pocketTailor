@@ -1,12 +1,12 @@
-import React, { useState, useEffect }
- from 'react';
- import { useNavigate } from 'react-router-dom';
-import './ViewCustomers.css'
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './ViewCustomers.css';
+
 const ViewCustomers = () => {
   const [customers, setCustomers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
- 
+
   const jsonData = [
     { id: 1, name: 'John Doe', phone: '1234567890', gender: 'Male' },
     { id: 2, name: 'Jane Smith', phone: '0987654321', gender: 'Female' },
@@ -26,31 +26,20 @@ const ViewCustomers = () => {
     { id: 1, name: 'John Doe', phone: '1234567890', gender: 'Male' },
     { id: 2, name: 'Jane Smith', phone: '0987654321', gender: 'Female' },
     { id: 3, name: 'Sam Wilson', phone: '5551234567', gender: 'Male' },
-    { id: 1, name: 'John Doe', phone: '1234567890', gender: 'Male' },
-    { id: 2, name: 'Jane Smith', phone: '0987654321', gender: 'Female' },
-    { id: 3, name: 'Sam Wilson', phone: '5551234567', gender: 'Male' },
-    { id: 1, name: 'John Doe', phone: '1234567890', gender: 'Male' },
-    { id: 2, name: 'Jane Smith', phone: '0987654321', gender: 'Female' },
-    { id: 3, name: 'Sam Wilson', phone: '5551234567', gender: 'Male' },
-    { id: 1, name: 'John Doe', phone: '1234567890', gender: 'Male' },
-    { id: 2, name: 'Jane Smith', phone: '0987654321', gender: 'Female' },
-    { id: 3, name: 'Sam Wilson', phone: '5551234567', gender: 'Male' },
-    { id: 1, name: 'John Doe', phone: '1234567890', gender: 'Male' },
-    { id: 2, name: 'Jane Smith', phone: '0987654321', gender: 'Female' },
-    { id: 3, name: 'Sam Wilson', phone: '5551234567', gender: 'Male' },
-    
   ];
 
-
   useEffect(() => {
-  
     setCustomers(jsonData);
   }, []);
-  const AddClient=()=>{
+
+  const AddClient = () => {
     navigate('/add-client');
+  };
 
-  }
+  const handleCustomerSelect = (customer) => {
+    navigate('/order', { state: { userName: customer.name, phoneNumber: customer.phone } });
 
+  };
 
   const filteredCustomers = customers.filter(
     (customer) =>
@@ -82,7 +71,11 @@ const ViewCustomers = () => {
         <tbody>
           {filteredCustomers.length > 0 ? (
             filteredCustomers.map((customer) => (
-              <tr key={customer.id}>
+              <tr
+                key={customer.id}
+                onClick={() => handleCustomerSelect(customer)} // Redirect on row click
+                style={{ cursor: 'pointer' }}
+              >
                 <td>{customer.name}</td>
                 <td>{customer.phone}</td>
                 <td>{customer.gender}</td>
@@ -90,8 +83,9 @@ const ViewCustomers = () => {
             ))
           ) : (
             <tr>
-              <td colSpan="3">No matching customers found.click on Add Client</td>
-             
+              <td colSpan="3">
+                No matching customers found. Click on Add Client.
+              </td>
             </tr>
           )}
         </tbody>

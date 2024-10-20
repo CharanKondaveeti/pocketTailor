@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { FaArrowLeft } from 'react-icons/fa';
+import './OrderPage.css';
 
 const OrderPage = () => {
-  const history = useHistory();
-  
+  const navigate = useNavigate();
+  const { state } = useLocation();
+  const { userName, phoneNumber } = state || {};
+
   const [orderDate, setOrderDate] = useState('');
   const [garmentType, setGarmentType] = useState('');
-  const [useExistingMeasurements, setUseExistingMeasurements] = useState(true);
+  const [measurementOption, setMeasurementOption] = useState('');
   const [selectedMeasurement, setSelectedMeasurement] = useState('');
   const [deliveryDate, setDeliveryDate] = useState('');
-  
-  
+
+  const garmentTypes = ['Shirt', 'Pants', 'Dress', 'Skirt'];
+
   const existingMeasurements = {
     Shirt: [
       { id: 1, neck: '15', chest: '38', waist: '32' },
@@ -20,109 +25,149 @@ const OrderPage = () => {
       { id: 3, waist: '32', inseam: '30' },
       { id: 4, waist: '34', inseam: '32' },
     ],
+    Dress: [
+      { id: 5, bust: '28', waist: '24', length: '36' },
+      { id: 6, bust: '30', waist: '26', length: '38' },
+    ],
+    Skirt: [
+      { id: 7, waist: '24', length: '20' },
+      { id: 8, waist: '26', length: '22' },
+    ],
   };
 
-  const garmentTypes = ['Shirt', 'Pants']; 
+  const handleBack = () => navigate(-1); // Go back to the previous page
 
   const handleMeasurementChange = (e) => {
     setSelectedMeasurement(e.target.value);
   };
 
   const handleAddNewMeasurements = () => {
-    history.push('/add-new-measurements'); 
+    navigate('/measurements'); // Redirect to add new measurements
+  };
+
+  const getMeasurementDetails = (measurement) => {
+    return (
+      <div className="measurement-details">
+        {Object.entries(measurement)
+          .filter(([key]) => key !== 'id')
+          .map(([key, value]) => (
+            <p key={key}>
+              {`${key.charAt(0).toUpperCase() + key.slice(1)}: ${value} inches`}
+            </p>
+          ))}
+        <button onClick={handleAddNewMeasurements}>Edit</button>
+      </div>
+    );
   };
 
   return (
     <div className="order-page">
-      <h1>Order Page</h1>
-      <button onClick={() => history.goBack()}>Back</button>
+      {/* Top Section with Back Button and Heading */}
+      <div className="order-top">
+        <button onClick={handleBack}>
+          <FaArrowLeft />
+        </button>
+        <h1>Order Page</h1>
+      </div>
+    
+      <img
+        src="https://res.cloudinary.com/djbz2ydtp/image/upload/v1729314626/female_lo0lca.jpg"
+        className='profile-photo'
+        alt="image"
+      />
+           
+      <div className="user-info1">
+        <p><strong>Name:</strong> {userName || 'N/A'}</p>
+        <p><strong>Phone:</strong> {phoneNumber || 'N/A'}</p>
+      </div>
       
-      <div>
+      {/* Order Date */}
+      <div className="form-group">
         <label>Order Date:</label>
-        <input 
-          type="date" 
-          value={orderDate} 
-          onChange={(e) => setOrderDate(e.target.value)} 
+        <input
+          type="date"
+          value={orderDate}
+          onChange={(e) => setOrderDate(e.target.value)}
         />
       </div>
 
-      <div>
+      {/* Select Garment Type */}
+      <div className="form-group">
         <label>Type of Garment:</label>
-        <select 
-          value={garmentType} 
+        <select
+          value={garmentType}
           onChange={(e) => {
             setGarmentType(e.target.value);
-            setSelectedMeasurement(''); 
+            setSelectedMeasurement('');
           }}
         >
           <option value="">Select</option>
           {garmentTypes.map((type) => (
-            <option key={type} value={type}>{type}</option>
+            <option key={type} value={type}>
+              {type}
+            </option>
           ))}
         </select>
       </div>
 
-      <div>
+      {/* Measurement Option Dropdown */}
+      <div className="form-group">
         <label>Measurements:</label>
-        <div>
-          <label>
-            <input 
-              type="radio" 
-              name="measurementOption" 
-              value="existing" 
-              checked={useExistingMeasurements} 
-              onChange={() => setUseExistingMeasurements(true)} 
-            />
-            Use Existing Measurement
-          </label>
+        <select
+          value={measurementOption}
+          onChange={(e) => {
+            const selectedOption = e.target.value;
+            setMeasurementOption(selectedOption);
+            if (selectedOption === 'Add New Measurement') {
+              handleAddNewMeasurements();
+            } else {
+              setSelectedMeasurement('');
+            }
+          }}
+        >
+          <option value="">Select Measurement Option</option>
+          <option value="Use Existing Measurement">Use Existing Measurement</option>
+          <option value="Add New Measurement">Add New Measurement</option>
+        </select>
 
-          <label>
-            <input 
-              type="radio" 
-              name="measurementOption" 
-              value="new" 
-              checked={!useExistingMeasurements} 
-              onChange={() => {
-                setUseExistingMeasurements(false);
-                handleAddNewMeasurements(); 
-              }} 
-            />
-            Add New Measurement
-          </label>
-        </div>
-
-        {useExistingMeasurements && garmentType && (
-          <div>
+        {/* Show Existing Measurements if Selected */}
+        {measurementOption === 'Use Existing Measurement' && garmentType && (
+          <div className="existing-measurements">
             <label>Select Measurement:</label>
-            <select 
-              value={selectedMeasurement} 
+            <select
+              value={selectedMeasurement}
               onChange={handleMeasurementChange}
             >
               <option value="">Select</option>
               {existingMeasurements[garmentType]?.map((measurement) => (
                 <option key={measurement.id} value={measurement.id}>
-                  {`ID: ${measurement.id} - Neck: ${measurement.neck} - Chest: ${measurement.chest} - Waist: ${measurement.waist}`}
+                  {`ID: ${measurement.id}`}
                 </option>
               ))}
             </select>
+
+            {/* Display Selected Measurement Details with Edit Option */}
             {selectedMeasurement && (
-              <div>
+              <>
                 <h4>Selected Measurements:</h4>
-              <p>Neck:{existingMeasurements[garmentType].find(m => m.id === parseInt(selectedMeasurement)).neck} inches</p>
-                <p>Chest:{existingMeasurements[garmentType].find(m => m.id === parseInt(selectedMeasurement)).chest} inches</p>
-                <p>Waist:{existingMeasurements[garmentType].find(m => m.id === parseInt(selectedMeasurement)).waist} inches</p>
-              </div>
+                {getMeasurementDetails(
+                  existingMeasurements[garmentType].find(
+                    (m) => m.id === parseInt(selectedMeasurement)
+                  )
+                )}
+              </>
             )}
           </div>
         )}
       </div>
 
-      <div>
+      {/* Delivery Date */}
+      <div className="form-group">
         <label>Delivery Date:</label>
-        <input 
-          type="date" 
-          value={deliveryDate} 
-          onChange={(e) => setDeliveryDate(e.target.value)} 
+        <input
+          type="date"
+          value={deliveryDate}
+          onChange={(e) => setDeliveryDate(e.target.value)}
         />
       </div>
     </div>
