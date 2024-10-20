@@ -1,55 +1,114 @@
 .order-page {
+  width: 80%;
   max-width: 600px;
-  margin: 50px auto;
+  margin: 20px auto;
   padding: 20px;
+  border: 1px solid #ddd;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #f9f9f9;
-  font-family: Arial, sans-serif;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
 }
 
 .order-top {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
+  gap: 10px;
 }
 
-.order-top button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
-  color: #333;
+.order-top h1 {
+  flex-grow: 1;
+  text-align: center;
 }
 
-.order-page h1 {
-  margin: 0;
-  flex:1;
-  color: #333;
+.user-info p {
+  margin: 5px 0;
+  font-weight: 500;
 }
 
-.order-page div {
-  margin-bottom: 15px;
+.form-group {
+  margin: 15px 0;
+  display: flex;
+  flex-direction: column;
 }
 
-.order-page label {
-  display: block;
+.form-group label {
+  font-weight: bold;
   margin-bottom: 5px;
-  font-weight: bold;
-  color: #555;
 }
 
-.order-page input,
-.order-page select {
-  width: 100%;
+input,
+select {
   padding: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
   border-radius: 4px;
-  margin-top: 5px;
+  font-size: 16px;
 }
 
-.no-measurements {
-  color: red;
-  font-weight: bold;
+.measurement-details {
+  margin-top: 10px;
+  padding: 15px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.measurement-details p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.edit-button {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.edit-button:hover {
+  background-color: #45a049;
+}
+.confirm-order-button {
+  display: block;
+  width: 50%;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 20px auto;
+}
+
+.confirm-order-button:hover {
+  background-color: #0056b3;
+}
+.garment-item {
+  background-color: red;
+  display: block;
+  width: 50%;
+  margin-top: 20px;
+  padding: 10px;
+  /* background-color: #007bff; */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 20px auto;
+}
+
+.garment-item button:hover {
+  background-color: darkred;
 }

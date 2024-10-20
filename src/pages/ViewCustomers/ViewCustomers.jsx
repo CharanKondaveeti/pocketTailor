@@ -8,23 +8,26 @@ const ViewCustomers = () => {
   const navigate = useNavigate();
 
   const jsonData = [
-    { id: 1, name: 'John Doe', phone: '1234567890', gender: 'Male' },
-    { id: 2, name: 'Jane Smith', phone: '0987654321', gender: 'Female' },
-    { id: 3, name: 'Sam Wilson', phone: '5551234567', gender: 'Male' },
-    { id: 1, name: 'John Doe', phone: '1234567890', gender: 'Male' },
-    { id: 2, name: 'Jane Smith', phone: '0987654321', gender: 'Female' },
-    { id: 3, name: 'Sam Wilson', phone: '5551234567', gender: 'Male' },
-    { id: 1, name: 'John Doe', phone: '1234567890', gender: 'Male' },
-    { id: 2, name: 'Jane Smith', phone: '0987654321', gender: 'Female' },
-    { id: 3, name: 'Sam Wilson', phone: '5551234567', gender: 'Male' },
-    { id: 1, name: 'John Doe', phone: '1234567890', gender: 'Male' },
-    { id: 2, name: 'Jane Smith', phone: '0987654321', gender: 'Female' },
-    { id: 3, name: 'Sam Wilson', phone: '5551234567', gender: 'Male' },
-    { id: 1, name: 'John Doe', phone: '1234567890', gender: 'Male' },
-    { id: 2, name: 'Jane Smith', phone: '0987654321', gender: 'Female' },
-    { id: 3, name: 'Sam Wilson', phone: '5551234567', gender: 'Male' },
-    { id: 1, name: 'John Doe', phone: '1234567890', gender: 'Male' },
-    { id: 2, name: 'Jane Smith', phone: '0987654321', gender: 'Female' },
+    {
+      id: 1,
+      name: 'John Doe',
+      phone: '1234567890',
+      gender: 'Male',
+      measurements: {
+        Shirt: [{ id: 1, neck: '15', chest: '38', waist: '32' }],
+        Pants: [{ id: 2, waist: '32', inseam: '30' }],
+      },
+    },
+    {
+      id: 2,
+      name: 'Jane Smith',
+      phone: '0987654321',
+      gender: 'Female',
+      measurements: {
+        Dress: [{ id: 3, bust: '28', waist: '24', length: '36' }],
+        Skirt: [{ id: 4, waist: '26', length: '22' }],
+      },
+    },
     { id: 3, name: 'Sam Wilson', phone: '5551234567', gender: 'Male' },
   ];
 
@@ -32,15 +35,18 @@ const ViewCustomers = () => {
     setCustomers(jsonData);
   }, []);
 
-  const AddClient = () => {
-    navigate('/add-client');
-  };
+  const AddClient = () => navigate('/add-client');
 
   const handleCustomerSelect = (customer) => {
-    navigate('/order', { state: { userName: customer.name, phoneNumber: customer.phone } });
-
+    navigate('/order', {
+      state: {
+        userName: customer.name,
+        phoneNumber: customer.phone,
+        measurements: customer.measurements || {}, // Default to an empty object
+      },
+    });
   };
-
+  
   const filteredCustomers = customers.filter(
     (customer) =>
       customer.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -73,7 +79,7 @@ const ViewCustomers = () => {
             filteredCustomers.map((customer) => (
               <tr
                 key={customer.id}
-                onClick={() => handleCustomerSelect(customer)} // Redirect on row click
+                onClick={() => handleCustomerSelect(customer)}
                 style={{ cursor: 'pointer' }}
               >
                 <td>{customer.name}</td>
@@ -83,9 +89,7 @@ const ViewCustomers = () => {
             ))
           ) : (
             <tr>
-              <td colSpan="3">
-                No matching customers found. Click on Add Client.
-              </td>
+              <td colSpan="3">No matching customers found. Click on Add Client.</td>
             </tr>
           )}
         </tbody>
@@ -95,3 +99,6 @@ const ViewCustomers = () => {
 };
 
 export default ViewCustomers;
+
+
+

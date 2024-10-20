@@ -1,3 +1,141 @@
+// import React, { useState } from 'react';
+// import { useNavigate, useLocation } from 'react-router-dom';
+// import { FaArrowLeft } from 'react-icons/fa';
+// import './OrderPage.css';
+
+// const OrderPage = () => {
+//   const navigate = useNavigate();
+//   const { state } = useLocation();
+//   const { userName, phoneNumber, measurements } = state || {};
+
+//   console.log('Received measurements:', measurements); // Debugging
+
+//   const [orderDate, setOrderDate] = useState('');
+//   const [deliveryDate, setDeliveryDate] = useState('');
+//   const [garmentType, setGarmentType] = useState('');
+//   const [selectedMeasurement, setSelectedMeasurement] = useState(null);
+//   const [measurementOption, setMeasurementOption] = useState('');
+
+//   const garmentTypes = ['Shirt', 'Pants', 'Dress', 'Skirt'];
+
+//   const handleBack = () => navigate(-1);
+
+//   const handleGarmentTypeChange = (e) => {
+//     const selectedGarment = e.target.value;
+//     setGarmentType(selectedGarment);
+
+//     if (measurementOption === 'existing') {
+//       const garmentMeasurements = measurements?.[selectedGarment] || [];
+//       setSelectedMeasurement(garmentMeasurements.length > 0 ? garmentMeasurements[0] : null);
+//     }
+//   };
+
+//   const handleMeasurementOptionChange = (e) => {
+//     const option = e.target.value;
+//     setMeasurementOption(option);
+
+//     if (option === 'new') {
+//       navigate('/measurements');
+//     } else if (garmentType) {
+//       const garmentMeasurements = measurements?.[garmentType] || [];
+//       setSelectedMeasurement(garmentMeasurements.length > 0 ? garmentMeasurements[0] : null);
+//     }
+//   };
+
+//   const getMeasurementDetails = (measurement) => (
+//     <div className="measurement-details">
+//       {Object.entries(measurement).map(([key, value]) => (
+//         <p key={key}>
+//           {`${key.charAt(0).toUpperCase() + key.slice(1)}: ${value} inches`}
+//         </p>
+//       ))}
+//       <button
+//         className="edit-button"
+//         onClick={() => navigate('/measurements/edit', { state: { garmentType, measurement } })}
+//       >
+//         Edit
+//       </button>
+//     </div>
+//   );
+//   const handleConfirmOrder = () => {
+  
+//     alert('Order confirmed!'); 
+    
+//      navigate('/homepage');
+//   };
+
+//   return (
+//     <div className="order-page">
+//       <div className="order-top">
+//         <button onClick={handleBack}>
+//           <FaArrowLeft />
+//         </button>
+//         <h1>Order Page</h1>
+//       </div>
+//       <img src="https://res.cloudinary.com/djbz2ydtp/image/upload/v1729314626/female_lo0lca.jpg" className='profile-photo' alt="image"></img>
+//       <div className="user-info">
+//         <p><strong>Name:</strong> {userName || 'N/A'}</p>
+//         <p><strong>Phone:</strong> {phoneNumber || 'N/A'}</p>
+//       </div>
+
+//       <div className="form-group">
+//         <label>Order Date:</label>
+//         <input
+//           type="date"
+//           value={orderDate}
+//           onChange={(e) => setOrderDate(e.target.value)}
+//         />
+//       </div>
+
+//       <div className="form-group">
+//         <label>Delivery Date:</label>
+//         <input
+//           type="date"
+//           value={deliveryDate}
+//           onChange={(e) => setDeliveryDate(e.target.value)}
+//         />
+//       </div>
+
+//       <div className="form-group">
+//         <label>Type of Garment:</label>
+//         <select value={garmentType} onChange={handleGarmentTypeChange}>
+//           <option value="">Select</option>
+//           {garmentTypes.map((type) => (
+//             <option key={type} value={type}>
+//               {type}
+//             </option>
+//           ))}
+//         </select>
+//       </div>
+
+//       <div className="form-group">
+//         <label>Measurement Option:</label>
+//         <select value={measurementOption} onChange={handleMeasurementOptionChange}>
+//           <option value="">Select</option>
+//           <option value="existing">Choose Existing</option>
+//           <option value="new">Add New</option>
+//         </select>
+//       </div>
+
+//       {measurementOption === 'existing' && selectedMeasurement ? (
+//         <div className="existing-measurements">
+//           <h4>Measurement Details:</h4>
+//           {getMeasurementDetails(selectedMeasurement)}
+//         </div>
+//       ) : (
+//         measurementOption === 'existing' && garmentType && (
+//           <p>No measurements found for this garment type.</p>
+//         )
+//       )}
+//       <button className="confirm-order-button" onClick={handleConfirmOrder}>
+//         Confirm Order
+//       </button>
+//     </div>
+    
+//   );
+// };
+
+// export default OrderPage;
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
@@ -6,170 +144,149 @@ import './OrderPage.css';
 const OrderPage = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
-  const { userName, phoneNumber } = state || {};
+  const { userName, phoneNumber, measurements } = state || {};
 
-  const [orderDate, setOrderDate] = useState('');
-  const [garmentType, setGarmentType] = useState('');
-  const [measurementOption, setMeasurementOption] = useState('');
-  const [selectedMeasurement, setSelectedMeasurement] = useState('');
-  const [deliveryDate, setDeliveryDate] = useState('');
+  console.log('Received measurements:', measurements); // Debugging
+
+  // State to hold multiple orders
+  const [orders, setOrders] = useState([{ orderDate: '', deliveryDate: '', garmentType: '', measurementOption: '', selectedMeasurement: null }]);
 
   const garmentTypes = ['Shirt', 'Pants', 'Dress', 'Skirt'];
 
-  const existingMeasurements = {
-    Shirt: [
-      { id: 1, neck: '15', chest: '38', waist: '32' },
-      { id: 2, neck: '16', chest: '40', waist: '34' },
-    ],
-    Pants: [
-      { id: 3, waist: '32', inseam: '30' },
-      { id: 4, waist: '34', inseam: '32' },
-    ],
-    Dress: [
-      { id: 5, bust: '28', waist: '24', length: '36' },
-      { id: 6, bust: '30', waist: '26', length: '38' },
-    ],
-    Skirt: [
-      { id: 7, waist: '24', length: '20' },
-      { id: 8, waist: '26', length: '22' },
-    ],
+  const handleBack = () => navigate(-1);
+
+  const handleGarmentTypeChange = (index, e) => {
+    const selectedGarment = e.target.value;
+    const newOrders = [...orders];
+    newOrders[index].garmentType = selectedGarment;
+
+    if (newOrders[index].measurementOption === 'existing') {
+      const garmentMeasurements = measurements?.[selectedGarment] || [];
+      newOrders[index].selectedMeasurement = garmentMeasurements.length > 0 ? garmentMeasurements[0] : null;
+    }
+
+    setOrders(newOrders);
   };
 
-  const handleBack = () => navigate(-1); // Go back to the previous page
+  const handleMeasurementOptionChange = (index, e) => {
+    const option = e.target.value;
+    const newOrders = [...orders];
+    newOrders[index].measurementOption = option;
 
-  const handleMeasurementChange = (e) => {
-    setSelectedMeasurement(e.target.value);
+    if (option === 'new') {
+      navigate('/measurements');
+    } else {
+      const garmentMeasurements = measurements?.[newOrders[index].garmentType] || [];
+      newOrders[index].selectedMeasurement = garmentMeasurements.length > 0 ? garmentMeasurements[0] : null;
+    }
+
+    setOrders(newOrders);
   };
 
-  const handleAddNewMeasurements = () => {
-    navigate('/measurements'); // Redirect to add new measurements
+  const handleInputChange = (index, field, value) => {
+    const newOrders = [...orders];
+    newOrders[index][field] = value;
+    setOrders(newOrders);
   };
 
-  const getMeasurementDetails = (measurement) => {
-    return (
-      <div className="measurement-details">
-        {Object.entries(measurement)
-          .filter(([key]) => key !== 'id')
-          .map(([key, value]) => (
-            <p key={key}>
-              {`${key.charAt(0).toUpperCase() + key.slice(1)}: ${value} inches`}
-            </p>
-          ))}
-        <button onClick={handleAddNewMeasurements}>Edit</button>
-      </div>
-    );
+  const addOrder = () => {
+    setOrders([...orders, { orderDate: '', deliveryDate: '', garmentType: '', measurementOption: '', selectedMeasurement: null }]);
+  };
+
+  const getMeasurementDetails = (measurement) => (
+    <div className="measurement-details">
+      {Object.entries(measurement).map(([key, value]) => (
+        <p key={key}>
+          {`${key.charAt(0).toUpperCase() + key.slice(1)}: ${value} inches`}
+        </p>
+      ))}
+      <button
+        className="edit-button"
+        onClick={() => navigate('/measurements/edit', { state: { garmentType: measurement.garmentType, measurement } })}
+      >
+        Edit
+      </button>
+    </div>
+  );
+
+  const handleConfirmOrder = () => {
+    alert('Order confirmed!');
+    navigate('/homepage');
   };
 
   return (
     <div className="order-page">
-      {/* Top Section with Back Button and Heading */}
       <div className="order-top">
         <button onClick={handleBack}>
           <FaArrowLeft />
         </button>
         <h1>Order Page</h1>
       </div>
-    
-      <img
-        src="https://res.cloudinary.com/djbz2ydtp/image/upload/v1729314626/female_lo0lca.jpg"
-        className='profile-photo'
-        alt="image"
-      />
-           
-      <div className="user-info1">
+      <img src="https://res.cloudinary.com/djbz2ydtp/image/upload/v1729314626/female_lo0lca.jpg" className='profile-photo' alt="image"></img>
+      <div className="user-info">
         <p><strong>Name:</strong> {userName || 'N/A'}</p>
         <p><strong>Phone:</strong> {phoneNumber || 'N/A'}</p>
       </div>
-      
-      {/* Order Date */}
-      <div className="form-group">
-        <label>Order Date:</label>
-        <input
-          type="date"
-          value={orderDate}
-          onChange={(e) => setOrderDate(e.target.value)}
-        />
-      </div>
 
-      {/* Select Garment Type */}
-      <div className="form-group">
-        <label>Type of Garment:</label>
-        <select
-          value={garmentType}
-          onChange={(e) => {
-            setGarmentType(e.target.value);
-            setSelectedMeasurement('');
-          }}
-        >
-          <option value="">Select</option>
-          {garmentTypes.map((type) => (
-            <option key={type} value={type}>
-              {type}
-            </option>
-          ))}
-        </select>
-      </div>
+      {orders.map((order, index) => (
+        <div key={index} className="order-entry">
+          <div className="form-group">
+            <label>Order Date:</label>
+            <input
+              type="date"
+              value={order.orderDate}
+              onChange={(e) => handleInputChange(index, 'orderDate', e.target.value)}
+            />
+          </div>
 
-      {/* Measurement Option Dropdown */}
-      <div className="form-group">
-        <label>Measurements:</label>
-        <select
-          value={measurementOption}
-          onChange={(e) => {
-            const selectedOption = e.target.value;
-            setMeasurementOption(selectedOption);
-            if (selectedOption === 'Add New Measurement') {
-              handleAddNewMeasurements();
-            } else {
-              setSelectedMeasurement('');
-            }
-          }}
-        >
-          <option value="">Select Measurement Option</option>
-          <option value="Use Existing Measurement">Use Existing Measurement</option>
-          <option value="Add New Measurement">Add New Measurement</option>
-        </select>
+          <div className="form-group">
+            <label>Delivery Date:</label>
+            <input
+              type="date"
+              value={order.deliveryDate}
+              onChange={(e) => handleInputChange(index, 'deliveryDate', e.target.value)}
+            />
+          </div>
 
-        {/* Show Existing Measurements if Selected */}
-        {measurementOption === 'Use Existing Measurement' && garmentType && (
-          <div className="existing-measurements">
-            <label>Select Measurement:</label>
-            <select
-              value={selectedMeasurement}
-              onChange={handleMeasurementChange}
-            >
+          <div className="form-group">
+            <label>Type of Garment:</label>
+            <select value={order.garmentType} onChange={(e) => handleGarmentTypeChange(index, e)}>
               <option value="">Select</option>
-              {existingMeasurements[garmentType]?.map((measurement) => (
-                <option key={measurement.id} value={measurement.id}>
-                  {`ID: ${measurement.id}`}
-                </option>
+              {garmentTypes.map((type) => (
+                <option key={type} value={type}>{type}</option>
               ))}
             </select>
-
-            {/* Display Selected Measurement Details with Edit Option */}
-            {selectedMeasurement && (
-              <>
-                <h4>Selected Measurements:</h4>
-                {getMeasurementDetails(
-                  existingMeasurements[garmentType].find(
-                    (m) => m.id === parseInt(selectedMeasurement)
-                  )
-                )}
-              </>
-            )}
           </div>
-        )}
-      </div>
 
-      {/* Delivery Date */}
-      <div className="form-group">
-        <label>Delivery Date:</label>
-        <input
-          type="date"
-          value={deliveryDate}
-          onChange={(e) => setDeliveryDate(e.target.value)}
-        />
-      </div>
+          <div className="form-group">
+            <label>Measurement Option:</label>
+            <select value={order.measurementOption} onChange={(e) => handleMeasurementOptionChange(index, e)}>
+              <option value="">Select</option>
+              <option value="existing">Choose Existing</option>
+              <option value="new">Add New</option>
+            </select>
+          </div>
+
+          {order.measurementOption === 'existing' && order.selectedMeasurement ? (
+            <div className="existing-measurements">
+              <h4>Measurement Details:</h4>
+              {getMeasurementDetails(order.selectedMeasurement)}
+            </div>
+          ) : (
+            order.measurementOption === 'existing' && order.garmentType && (
+              <p>No measurements found for this garment type.</p>
+            )
+          )}
+        </div>
+      ))}
+
+      <button className="garment-item" onClick={addOrder}>
+        Add Another Garment
+      </button>
+
+      <button className="confirm-order-button" onClick={handleConfirmOrder}>
+        Confirm Order
+      </button>
     </div>
   );
 };
