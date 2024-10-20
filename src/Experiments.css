@@ -2,8 +2,6 @@
   width: 4rem;
   height: 6rem;
   overflow: hidden;
-  border: 1px solid #ccc;
-  border-radius: 5px;
   cursor: pointer;
   position: relative;
   outline: none;
