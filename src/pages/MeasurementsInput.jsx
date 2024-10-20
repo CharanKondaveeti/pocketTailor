@@ -260,15 +260,21 @@ const MeasurementsInput = () => {
           Add Extra Field
         </button>
       </div>
-      <div className="measurement-bottom">
-        <div className="swipe-controls">
-          <Experiments
-            wholeNumberOptions={wholeNumberOptions}
-            decimalOptions={decimalOptions}
-            onWholeChange={handleWholeNumberChange}
-            onDecimalChange={handleDecimalChange}
-          />
-        </div>
+
+      <div className="swipe-controls">
+        <Experiments
+          wholeNumberOptions={wholeNumberOptions}
+          decimalOptions={decimalOptions}
+          onWholeChange={handleWholeNumberChange}
+          onDecimalChange={handleDecimalChange}
+        />
+
+        <Experiments
+          wholeNumberOptions={wholeNumberOptions}
+          decimalOptions={decimalOptions}
+          onWholeChange={handleWholeNumberChange}
+          onDecimalChange={handleDecimalChange}
+        />
         <button className="submit-button" onClick={handleSubmit}>
           Submit
         </button>

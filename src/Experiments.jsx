@@ -129,47 +129,6 @@ const Experiments = ({
           </div>
         ))}
       </div>
-
-      <div
-        className="wheel-picker-list"
-        onMouseDown={handleMouseDown}
-        onMouseMove={(event) =>
-          handleMouseMove(
-            event,
-            decimalOptions,
-            selectedDecimalIndex,
-            setSelectedDecimalIndex,
-            onDecimalChange
-          )
-        }
-        onTouchStart={handleTouchStart}
-        onTouchMove={(event) =>
-          handleTouchMove(
-            event,
-            decimalOptions,
-            selectedDecimalIndex,
-            setSelectedDecimalIndex,
-            onDecimalChange
-          )
-        }
-        style={{
-          transform: `translateY(-${
-            (selectedDecimalIndex - 1) * itemHeight
-          }px)`,
-          transition: isDragging ? "none" : "transform 0.3s ease-out",
-        }}
-      >
-        {decimalOptions.map((option, index) => (
-          <div
-            key={index}
-            className={`wheel-picker-item ${
-              index === selectedDecimalIndex ? "active" : ""
-            }`}
-          >
-            {option}
-          </div>
-        ))}
-      </div>
     </div>
   );
 };
