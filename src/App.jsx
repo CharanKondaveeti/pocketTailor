@@ -20,7 +20,7 @@ function App() {
           <Route path="/" element={<MeasurementsInput />} />
           <Route path="/homepage" element={<HomePage />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/order" element={<OrderPage/>} />
+         <Route path="/order" element={<OrderPage/>}/>
 
           <Route path="/view" element={<ViewCustomers />} />
           <Route path="/add-client" element={<AddClient />} />
