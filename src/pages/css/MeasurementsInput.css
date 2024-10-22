@@ -1,44 +1,75 @@
 .measurements-container {
   max-width: 800px;
-  margin: 20px auto;
   padding: 20px;
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+.row-1,
+.row-2 {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.row-2 {
+  gap: 1rem;
+  margin-bottom: 0rem;
+}
+
+.heading--primary {
+  font-size: 1.3rem;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  text-transform: capitalize;
+  letter-spacing: 0.1px;
+}
+
 .back-button {
   display: flex;
   align-items: center;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
+  color: #333;
+  background-color: transparent;
+  padding: 2px 4px;
+  border-radius: 4px;
   cursor: pointer;
   margin-bottom: 15px;
   font-size: 1rem;
   transition: background-color 0.3s ease;
-}
+  border: none;
 
-.back-button:hover {
-  background-color: #0069d9;
+  position: absolute;
+  left: 0%;
 }
 
 .measurement-name-input {
   width: 100%;
   padding: 10px;
-  margin-bottom: 20px;
-  border: 2px solid #007bff;
-  border-radius: 5px;
+  border: none;
+  border-bottom: 2px solid #007bff;
   font-size: 1.1rem;
   color: #333;
+
+  margin-bottom: 20px;
+}
+
+.measurement-name-input:focus {
+  outline: none;
+}
+
+.unit-toggle {
+  border: none;
+  background-color: transparent;
 }
 
 .measurements-grid {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
+  margin-bottom: 8rem;
 }
 
 .measurement-field {
@@ -60,23 +91,25 @@
 }
 
 .measurement-field .measurement-value {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
+  color: #333;
   margin-left: auto;
+}
+
+.measurement-field .measurement-value > .units {
+  font-size: 1rem;
 }
 
 .sticky-wheel-inputs {
   position: fixed;
   bottom: 0;
+  left: 0;
   width: 100%;
   display: flex;
   justify-content: center;
   background-color: white;
   padding: 15px 0;
   box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.wheel-input {
-  margin: 0 20px;
 }
 
 .add-field-btn {
@@ -92,8 +125,47 @@
   cursor: pointer;
   font-size: 1rem;
   transition: background-color 0.3s ease;
+  margin-bottom: 8rem;
 }
 
 .add-field-btn:hover {
   background-color: #218838;
+}
+
+.swipe-controls {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  background-color: white;
+  border-top: 1px solid #ccc;
+  padding: 10px;
+
+  justify-content: flex-start;
+}
+
+.measurement-field.selected {
+  border: 2px solid #000;
+}
+
+.field-label-input {
+  border: none;
+  background: transparent;
+  border-bottom: 1px solid black;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.field-label-input:focus {
+  outline: none;
+}
+
+.icon {
+  width: 5rem;
+  height: auto;
+}
+
+.icon > img {
+  width: 100%;
+  height: auto;
 }

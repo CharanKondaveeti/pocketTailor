@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import "./Experiments.css";
 
-const Experiments = ({ options, onChange }) => {
-  const [selectedIndex, setSelectedIndex] = useState(2); // Start with the third item highlighted
+const Experiments = ({
+  wholeNumberOptions,
+  decimalOptions,
+  onWholeChange,
+  onDecimalChange,
+}) => {
+  const [selectedWholeIndex, setSelectedWholeIndex] = useState(2); // Start with the third item highlighted for whole numbers
+  const [selectedDecimalIndex, setSelectedDecimalIndex] = useState(1); // Start with the second item highlighted for decimals
   const [isDragging, setIsDragging] = useState(false);
   const [startY, setStartY] = useState(0);
 
-  const itemHeight = 32; // Height of each item in pixels (adjusted based on CSS)
+  const itemHeight = 32; // Height of each item in pixels (adjust based on your CSS)
 
   const handleMouseDown = (event) => {
     event.preventDefault();
@@ -20,7 +26,13 @@ const Experiments = ({ options, onChange }) => {
     setStartY(event.touches[0].clientY);
   };
 
-  const handleMouseMove = (event) => {
+  const handleMouseMove = (
+    event,
+    options,
+    selectedIndex,
+    setSelectedIndex,
+    onChange
+  ) => {
     if (isDragging) {
       const currentY = event.clientY;
       const offset = startY - currentY;
@@ -39,7 +51,13 @@ const Experiments = ({ options, onChange }) => {
     }
   };
 
-  const handleTouchMove = (event) => {
+  const handleTouchMove = (
+    event,
+    options,
+    selectedIndex,
+    setSelectedIndex,
+    onChange
+  ) => {
     if (isDragging) {
       const currentY = event.touches[0].clientY;
       const offset = startY - currentY;
@@ -52,7 +70,6 @@ const Experiments = ({ options, onChange }) => {
       } else if (offset < -itemHeight && selectedIndex > 0) {
         const newIndex = Math.max(selectedIndex - 1, 0);
         setSelectedIndex(newIndex);
-        setStartY(currentY);
         onChange(options[newIndex]); // Call onChange with the new value
       }
     }
@@ -69,27 +86,43 @@ const Experiments = ({ options, onChange }) => {
   return (
     <div
       className="wheel-picker"
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
       style={{ touchAction: "none" }}
     >
       <div
         className="wheel-picker-list"
+        onMouseDown={handleMouseDown}
+        onMouseMove={(event) =>
+          handleMouseMove(
+            event,
+            wholeNumberOptions,
+            selectedWholeIndex,
+            setSelectedWholeIndex,
+            onWholeChange
+          )
+        }
+        onTouchStart={handleTouchStart}
+        onTouchMove={(event) =>
+          handleTouchMove(
+            event,
+            wholeNumberOptions,
+            selectedWholeIndex,
+            setSelectedWholeIndex,
+            onWholeChange
+          )
+        }
         style={{
-          transform: `translateY(-${(selectedIndex - 1) * itemHeight}px)`,
+          transform: `translateY(-${(selectedWholeIndex - 1) * itemHeight}px)`,
           transition: isDragging ? "none" : "transform 0.3s ease-out",
         }}
       >
-        {options.map((option, index) => (
+        {wholeNumberOptions.map((option, index) => (
           <div
             key={index}
             className={`wheel-picker-item ${
-              index === selectedIndex ? "active" : ""
+              index === selectedWholeIndex ? "active" : ""
             }`}
           >
             {option}
