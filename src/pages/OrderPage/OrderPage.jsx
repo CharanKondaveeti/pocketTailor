@@ -1,141 +1,4 @@
-// import React, { useState } from 'react';
-// import { useNavigate, useLocation } from 'react-router-dom';
-// import { FaArrowLeft } from 'react-icons/fa';
-// import './OrderPage.css';
 
-// const OrderPage = () => {
-//   const navigate = useNavigate();
-//   const { state } = useLocation();
-//   const { userName, phoneNumber, measurements } = state || {};
-
-//   console.log('Received measurements:', measurements); // Debugging
-
-//   const [orderDate, setOrderDate] = useState('');
-//   const [deliveryDate, setDeliveryDate] = useState('');
-//   const [garmentType, setGarmentType] = useState('');
-//   const [selectedMeasurement, setSelectedMeasurement] = useState(null);
-//   const [measurementOption, setMeasurementOption] = useState('');
-
-//   const garmentTypes = ['Shirt', 'Pants', 'Dress', 'Skirt'];
-
-//   const handleBack = () => navigate(-1);
-
-//   const handleGarmentTypeChange = (e) => {
-//     const selectedGarment = e.target.value;
-//     setGarmentType(selectedGarment);
-
-//     if (measurementOption === 'existing') {
-//       const garmentMeasurements = measurements?.[selectedGarment] || [];
-//       setSelectedMeasurement(garmentMeasurements.length > 0 ? garmentMeasurements[0] : null);
-//     }
-//   };
-
-//   const handleMeasurementOptionChange = (e) => {
-//     const option = e.target.value;
-//     setMeasurementOption(option);
-
-//     if (option === 'new') {
-//       navigate('/measurements');
-//     } else if (garmentType) {
-//       const garmentMeasurements = measurements?.[garmentType] || [];
-//       setSelectedMeasurement(garmentMeasurements.length > 0 ? garmentMeasurements[0] : null);
-//     }
-//   };
-
-//   const getMeasurementDetails = (measurement) => (
-//     <div className="measurement-details">
-//       {Object.entries(measurement).map(([key, value]) => (
-//         <p key={key}>
-//           {`${key.charAt(0).toUpperCase() + key.slice(1)}: ${value} inches`}
-//         </p>
-//       ))}
-//       <button
-//         className="edit-button"
-//         onClick={() => navigate('/measurements/edit', { state: { garmentType, measurement } })}
-//       >
-//         Edit
-//       </button>
-//     </div>
-//   );
-//   const handleConfirmOrder = () => {
-  
-//     alert('Order confirmed!'); 
-    
-//      navigate('/homepage');
-//   };
-
-//   return (
-//     <div className="order-page">
-//       <div className="order-top">
-//         <button onClick={handleBack}>
-//           <FaArrowLeft />
-//         </button>
-//         <h1>Order Page</h1>
-//       </div>
-//       <img src="https://res.cloudinary.com/djbz2ydtp/image/upload/v1729314626/female_lo0lca.jpg" className='profile-photo' alt="image"></img>
-//       <div className="user-info">
-//         <p><strong>Name:</strong> {userName || 'N/A'}</p>
-//         <p><strong>Phone:</strong> {phoneNumber || 'N/A'}</p>
-//       </div>
-
-//       <div className="form-group">
-//         <label>Order Date:</label>
-//         <input
-//           type="date"
-//           value={orderDate}
-//           onChange={(e) => setOrderDate(e.target.value)}
-//         />
-//       </div>
-
-//       <div className="form-group">
-//         <label>Delivery Date:</label>
-//         <input
-//           type="date"
-//           value={deliveryDate}
-//           onChange={(e) => setDeliveryDate(e.target.value)}
-//         />
-//       </div>
-
-//       <div className="form-group">
-//         <label>Type of Garment:</label>
-//         <select value={garmentType} onChange={handleGarmentTypeChange}>
-//           <option value="">Select</option>
-//           {garmentTypes.map((type) => (
-//             <option key={type} value={type}>
-//               {type}
-//             </option>
-//           ))}
-//         </select>
-//       </div>
-
-//       <div className="form-group">
-//         <label>Measurement Option:</label>
-//         <select value={measurementOption} onChange={handleMeasurementOptionChange}>
-//           <option value="">Select</option>
-//           <option value="existing">Choose Existing</option>
-//           <option value="new">Add New</option>
-//         </select>
-//       </div>
-
-//       {measurementOption === 'existing' && selectedMeasurement ? (
-//         <div className="existing-measurements">
-//           <h4>Measurement Details:</h4>
-//           {getMeasurementDetails(selectedMeasurement)}
-//         </div>
-//       ) : (
-//         measurementOption === 'existing' && garmentType && (
-//           <p>No measurements found for this garment type.</p>
-//         )
-//       )}
-//       <button className="confirm-order-button" onClick={handleConfirmOrder}>
-//         Confirm Order
-//       </button>
-//     </div>
-    
-//   );
-// };
-
-// export default OrderPage;
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
@@ -146,9 +9,9 @@ const OrderPage = () => {
   const { state } = useLocation();
   const { userName, phoneNumber, measurements } = state || {};
 
-  console.log('Received measurements:', measurements); // Debugging
+  console.log('Received measurements:', measurements); 
 
-  // State to hold multiple orders
+ 
   const [orders, setOrders] = useState([{ orderDate: '', deliveryDate: '', garmentType: '', measurementOption: '', selectedMeasurement: null }]);
 
   const garmentTypes = ['Shirt', 'Pants', 'Dress', 'Skirt'];
@@ -211,7 +74,7 @@ const OrderPage = () => {
 
   const handleConfirmOrder = () => {
     alert('Order confirmed!');
-    navigate('/homepage');
+    navigate('/dashboard');
   };
 
   return (
@@ -222,10 +85,12 @@ const OrderPage = () => {
         </button>
         <h1>Order Page</h1>
       </div>
+      <div className='info-container'>
       <img src="https://res.cloudinary.com/djbz2ydtp/image/upload/v1729314626/female_lo0lca.jpg" className='profile-photo' alt="image"></img>
       <div className="user-info">
         <p><strong>Name:</strong> {userName || 'N/A'}</p>
         <p><strong>Phone:</strong> {phoneNumber || 'N/A'}</p>
+      </div>
       </div>
 
       {orders.map((order, index) => (

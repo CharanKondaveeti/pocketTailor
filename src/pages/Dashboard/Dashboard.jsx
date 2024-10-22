@@ -1,8 +1,14 @@
 import React from 'react';
-import { FaFileInvoiceDollar, FaShoppingCart, FaUsers, FaTshirt } from 'react-icons/fa'; // Import icons
+import { FaFileInvoiceDollar, FaShoppingCart, FaUsers, FaTshirt } from 'react-icons/fa'; 
 import './Dashboard.css';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
+    const navigate=useNavigate();
+    const handleorders=()=>
+    {
+        navigate('/view');
+    }
     return (
         <div className="dashboard-container">
             <header className="dashboard-header">
@@ -15,11 +21,12 @@ const Dashboard = () => {
             </header>
 
             <div className="cards-container">
+                <h1>Services</h1>
                 <div className="card">
                     <FaFileInvoiceDollar className="card-icon" />
                     Billing
                 </div>
-                <div className="card">
+                <div className="card" onClick={handleorders}>
                     <FaShoppingCart className="card-icon" />
                     Orders
                 </div>
