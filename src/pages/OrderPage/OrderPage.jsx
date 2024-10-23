@@ -99,6 +99,7 @@ const OrderPage = () => {
             <label>Order Date:</label>
             <input
               type="date"
+              placeholder='select ordered date'
               value={order.orderDate}
               onChange={(e) => handleInputChange(index, 'orderDate', e.target.value)}
             />
@@ -108,6 +109,7 @@ const OrderPage = () => {
             <label>Delivery Date:</label>
             <input
               type="date"
+              placeholder='Add Delivery date'
               value={order.deliveryDate}
               onChange={(e) => handleInputChange(index, 'deliveryDate', e.target.value)}
             />
