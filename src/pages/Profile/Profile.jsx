@@ -1,13 +1,18 @@
 import React from 'react'
-import { FaRulerCombined, FaClipboardList } from 'react-icons/fa';
+import { FaRulerCombined, FaClipboardList,FaFileInvoiceDollar } from 'react-icons/fa';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import './Profile.css';
+import { useNavigate } from 'react-router-dom';
 function Profile() {
+    const navigate=useNavigate();
+    const back=()=>{
+        navigate(-1);
+    }
   return (
     <div className='profile-container'>
         <div className='top'>
         
-           <button className='back'> ← Back To Customer List</button>
+           <button className='back' onClick={back}> ← Back To Customer List</button>
             <button className='create-order'>+ Create Order</button>
             </div>
         <div className='details-card'>
@@ -36,6 +41,10 @@ function Profile() {
             </div>
             <div className='orders'>
                 <h3>  <FaClipboardList style={{ marginRight: '8px',color:'black' }} />Orders</h3>
+                <button className='view-button'>View</button>
+            </div>
+            <div className='orders'>
+                <h3>  <FaFileInvoiceDollar  style={{ marginRight: '8px',color:'black' }} />Billing</h3>
                 <button className='view-button'>View</button>
             </div>
              

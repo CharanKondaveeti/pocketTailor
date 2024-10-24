@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { FaUser, FaPhone,FaArrowLeft } from 'react-icons/fa';
 import './AddClient.css'
+import { useNavigate } from 'react-router-dom';
 const NewClientForm = () => {
   const [clientName, setClientName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [gender, setGender] = useState('');
- 
+ const navigate=useNavigate();
+ const back=()=>{
+  navigate('/view');
+}
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -21,7 +25,7 @@ const NewClientForm = () => {
   return (
     <form  className="client-container">
       <div className='client-top'>
-      <button>
+      <button onClick={back} type="button">
         <FaArrowLeft/>
       </button>
       <h2>New Client</h2>
@@ -36,7 +40,7 @@ const NewClientForm = () => {
           placeholder="Client Name"
           value={clientName}
           onChange={(e) => setClientName(e.target.value)}
-          required
+          
         />
         </div>
       
@@ -48,7 +52,7 @@ const NewClientForm = () => {
           placeholder="Phone Number"
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
-          required
+         
         />
       </div>
 

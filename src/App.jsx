@@ -10,6 +10,7 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 
 import MeasurementsInput from "./pages/MeasurementsInput";
 import Experiments from "./Experiments";
+import Loginregister from "./pages/LoginRegister.css/LoginRegister";
 
 const options = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
          <Route path="/order" element={<OrderPage/>}/>
          <Route path="/dashboard" element={<Dashboard/>}/>
+         <Route path="/login" element={<Loginregister/>}/>
 
           <Route path="/view" element={<ViewCustomers />} />
           <Route path="/add-client" element={<AddClient />} />
