@@ -1,0 +1,86 @@
+.client-container{
+    width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .client-top{
+    
+        display: flex;
+        align-items: center; 
+        
+        height: 40px; 
+        margin-bottom:20px;
+        
+      
+  }
+  .client-top h2 {
+    flex: 1;
+   
+    font-size: 26px;
+  }
+  .client-top button {
+    float: left;
+    padding: 5px 7px;
+    height: 30px;    
+    font-size: 14px;  
+         
+    background-color: transparent;
+    cursor: pointer;
+}
+
+  .client-fields input {
+    width: 80%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-bottom:20px;
+    margin-left:10px;
+    
+
+  }
+  .gender-selection {
+    display: flex;
+    flex-direction: column;
+    
+    
+    
+    width: 100%; 
+  }
+  .gender-label {
+    margin-bottom: 10px;
+    font-weight: bold;
+   
+  }
+  
+  .radio-group {
+    display: flex;
+    justify-content: space-around;
+    
+  }
+  
+  
+  
+  .submit-button {
+    text-align: center;
+  }
+  
+  .submit-button button{
+    padding: 10px 30px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top:30px;
+  }
+  
+  .submit-button button:hover {
+    background-color: #0056b3;
+  }
+  .input-icon{
+    color:#007bff;
+  }

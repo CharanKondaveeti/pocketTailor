@@ -11,6 +11,7 @@ import Dashboard from "./features/Dashboard/Dashboard";
 import MeasurementsInput from "./features/AddMesaurements";
 import Experiments from "./Experiments";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import Loginregister from "./pages/LoginRegister.css/LoginRegister";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "/addorder",
     element: <AddOrder />,
+  },
+  {
+    path: "/login",
+    element: <Loginregister />,
   },
   {
     path: "/profile",
