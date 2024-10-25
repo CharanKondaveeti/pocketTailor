@@ -1,42 +1,79 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./App.css";
-import Login from "./pages/Login";
-import HomePage from "./pages/HomePage";
-import Profile from "./pages/Profile/Profile";
-import OrderPage from "./pages/OrderPage/OrderPage";
 
-import AddClient from "./pages/AddClient/AddClient";
-import Dashboard from "./pages/Dashboard/Dashboard";
-import Viewcustomers from "./pages/ViewCustomers/Viewcustomers";
-import MeasurementsInput from "./pages/MeasurementsInput";
+
+import AddOrder from "./pages/AddOrder";
+import Profile from "./features/Profile/Profile";
+import OrderPage from "./features/OrderPage/OrderPage";
+import ViewCustomers from "./features/ViewCustomers/ChooseCustomer";
+import AddClient from "./features/AddClient/AddCustomer";
+import Dashboard from "./features/Dashboard/Dashboard";
+import MeasurementsInput from "./features/AddMesaurements";
 import Experiments from "./Experiments";
-import Loginregister from "./pages/LoginRegister.css/LoginRegister";
-import View from "./pages/View/View";
-import Billing from "./pages/Billing/Billing";
-const options = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import Loginregister from "./features/LoginRegister.css/LoginRegister";
+
+const queryClient = new QueryClient();
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Navigate to="/homepage" />,
+  },
+  {
+    path: "/homepage",
+    element: <HomePage />,
+  },
+  {
+    path: "/addorder",
+    element: <AddOrder />,
+  },
+  {
+    path: "/login",
+    element: <Loginregister />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
+  },
+  {
+    path: "/addmeasurements",
+    element: <MeasurementsInput />,
+  },
+  {
+    path: "/order",
+    element: <OrderPage />,
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+  },
+  {
+    path: "/choosecustomer",
+    element: <ViewCustomers />,
+  },
+  {
+    path: "/add-client",
+    element: <AddClient />,
+  },
+  {
+    path: "/exp",
+    element: <Experiments />,
+  },
+]);
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<MeasurementsInput />} />
-          <Route path="/homepage" element={<HomePage />} />
-          <Route path="/profile" element={<Profile />} />
-         <Route path="/order" element={<OrderPage/>}/>
-         <Route path="/dashboard" element={<Dashboard/>}/>
-         <Route path="/login" element={<Loginregister/>}/>
-         <Route path="/view" element={<View/>} />
-          <Route path="/viewcustomers" element={<Viewcustomers />} />
-          <Route path="/add-client" element={<AddClient />} />
-          <Route path="/measurements" element={<MeasurementsInput />} />
-          <Route path="/exp" element={<Experiments options={options} />} />
-          <Route path="/billing" element={<Billing />} />
-          
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />;
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
 
-        </Routes>
-      </div>
-    </Router>
   );
 }
 

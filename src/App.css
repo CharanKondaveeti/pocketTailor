@@ -54,14 +54,6 @@ html {
 .login-container button:hover {
   background-color: #45a049;
 }
-.homepage-container {
-  padding: 40px;
-}
-
-.homepage-container h1 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-}
 
 .features {
   display: flex;

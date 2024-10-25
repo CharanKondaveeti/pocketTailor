@@ -1,23 +1,35 @@
+import { NavLink } from "react-router-dom";
+import "./css/HomePage.css";
+
 const HomePage = () => {
   return (
     <div className="homepage-container">
       <h1>Welcome to PocketTailer</h1>
       <p>Manage your tailoring services effortlessly with our platform.</p>
 
-      <div className="features">
-        <div className="feature-card">
-          <h3>Order Management</h3>
-          <p>Track and manage all your tailoring orders in one place.</p>
-        </div>
-        <div className="feature-card">
-          <h3>Measurement Library</h3>
-          <p>Store and access your clients' measurements easily.</p>
-        </div>
-        <div className="feature-card">
-          <h3>Payment Integration</h3>
-          <p>Streamline your payment process with secure integrations.</p>
-        </div>
-      </div>
+      <ul
+        style={{ listStyle: "none", display: "flex", flexDirection: "column" }}
+        className="features"
+      >
+        {/* <li>
+          <NavLink to="/measurements">Measurements</NavLink>
+        </li>
+        <li>
+          <NavLink to="/profile">profile</NavLink>
+        </li>
+        <li>
+          <NavLink to="/order">order</NavLink>
+        </li>
+        <li>
+          <NavLink to="/dashboard">dashboard</NavLink>
+        </li>
+        <li>
+          <NavLink to="/choosecustomer">view</NavLink>
+        </li> */}
+        <li></li>
+      </ul>
+
+      <NavLink to="/addorder">addorder</NavLink>
     </div>
   );
 };
