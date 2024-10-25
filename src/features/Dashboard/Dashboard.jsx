@@ -14,7 +14,7 @@ const Dashboard = () => {
   const [showMenu, setShowMenu] = useState(false);
 
   const handleOrders = () => {
-    navigate("/view");
+    navigate("/choosecustomer");
   };
 
   const handleCustomers = () => {

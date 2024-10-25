@@ -11,12 +11,14 @@ import AddOrder from "./pages/AddOrder";
 import Profile from "./features/Profile/Profile";
 import OrderPage from "./features/OrderPage/OrderPage";
 import ViewCustomers from "./features/ViewCustomers/ChooseCustomer";
+import View from "./features/View/View";
 import AddClient from "./features/AddClient/AddCustomer";
 import Dashboard from "./features/Dashboard/Dashboard";
 import MeasurementsInput from "./features/AddMesaurements";
 import Experiments from "./Experiments";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Loginregister from "./features/LoginRegister.css/LoginRegister";
+import HomePage from "./pages/HomePage";
 
 const queryClient = new QueryClient();
 
@@ -56,6 +58,10 @@ const router = createBrowserRouter([
   {
     path: "/choosecustomer",
     element: <ViewCustomers />,
+  },
+  {
+    path: "/view",
+    element: <View />,
   },
   {
     path: "/add-client",
