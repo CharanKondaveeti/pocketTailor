@@ -24,6 +24,10 @@ const Dashboard = () => {
   const handleLogout = () => {
     navigate("/login");
   };
+  const handleBilling=()=>
+  {
+    navigate('/billing');
+  }
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -59,7 +63,7 @@ const Dashboard = () => {
 
       <div className="cards-container">
         <h1>Services</h1>
-        <div className="card">
+        <div className="card" onClick={handleBilling}>
           <FaFileInvoiceDollar className="card-icon" />
           Billing
         </div>

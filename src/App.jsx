@@ -19,6 +19,7 @@ import Experiments from "./Experiments";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Loginregister from "./features/LoginRegister.css/LoginRegister";
 import HomePage from "./pages/HomePage";
+import Billing from "./features/Billing/Billing";
 
 const queryClient = new QueryClient();
 
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
   {
     path: "/addmeasurements",
     element: <MeasurementsInput />,
+  },
+  {
+    path: "/billing",
+    element: <Billing />,
   },
   {
     path: "/order",
