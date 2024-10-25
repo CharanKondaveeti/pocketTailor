@@ -1,4 +1,8 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./App.css";
 import HomePage from "./pages/HomePage";
@@ -16,6 +20,10 @@ import Loginregister from "./pages/LoginRegister.css/LoginRegister";
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Navigate to="/homepage" />,
+  },
   {
     path: "/homepage",
     element: <HomePage />,
