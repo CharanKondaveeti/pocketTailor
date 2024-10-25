@@ -1,0 +1,369 @@
+{
+  "customers": [
+    {
+      "id": "1",
+      "name": "John Doe",
+      "phone": "1234567890",
+      "gender": "Male",
+      "measurements": {
+        "Shirt": [
+          {
+            "id": 1,
+            "neck": "15",
+            "chest": "38",
+            "waist": "32",
+            "sleeveLength": "25",
+            "length": "30"
+          }
+        ],
+        "Pants": [
+          {
+            "id": 2,
+            "waist": "32",
+            "inseam": "30",
+            "thigh": "22",
+            "knee": "18"
+          }
+        ],
+        "Suit": [
+          {
+            "id": 3,
+            "chest": "40",
+            "waist": "34",
+            "shoulder": "18",
+            "sleeveLength": "26"
+          }
+        ]
+      },
+      "orders": [
+        {
+          "orderId": 101,
+          "date": "2024-10-01",
+          "items": [
+            {
+              "type": "Shirt",
+              "quantity": 2
+            },
+            {
+              "type": "Pants",
+              "quantity": 1
+            }
+          ],
+          "totalAmount": 100,
+          "paymentStatus": "Paid"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Jane Smith",
+      "phone": "0987654321",
+      "gender": "Female",
+      "measurements": {
+        "Dress": [
+          {
+            "id": 4,
+            "bust": "34",
+            "waist": "28",
+            "hip": "36",
+            "length": "42",
+            "sleeveLength": "24"
+          }
+        ],
+        "Skirt": [
+          {
+            "id": 5,
+            "waist": "26",
+            "length": "22",
+            "hip": "36"
+          }
+        ],
+        "Blouse": [
+          {
+            "id": 6,
+            "bust": "34",
+            "waist": "28",
+            "sleeveLength": "22"
+          }
+        ]
+      },
+      "orders": [
+        {
+          "orderId": 102,
+          "date": "2024-10-05",
+          "items": [
+            {
+              "type": "Dress",
+              "quantity": 1
+            },
+            {
+              "type": "Blouse",
+              "quantity": 1
+            }
+          ],
+          "totalAmount": 150,
+          "paymentStatus": "Pending"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Sam Wilson",
+      "phone": "5551234567",
+      "gender": "Male",
+      "measurements": {
+        "Shirt": [
+          {
+            "id": 7,
+            "neck": "16",
+            "chest": "40",
+            "waist": "34",
+            "sleeveLength": "26",
+            "length": "32"
+          }
+        ],
+        "Pants": [
+          {
+            "id": 8,
+            "waist": "34",
+            "inseam": "32",
+            "thigh": "23",
+            "knee": "19"
+          }
+        ]
+      },
+      "orders": [
+        {
+          "orderId": 103,
+          "date": "2024-10-10",
+          "items": [
+            {
+              "type": "Shirt",
+              "quantity": 1
+            }
+          ],
+          "totalAmount": 50,
+          "paymentStatus": "Paid"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Emily Johnson",
+      "phone": "9876543210",
+      "gender": "Female",
+      "measurements": {
+        "Dress": [
+          {
+            "id": 9,
+            "bust": "36",
+            "waist": "30",
+            "hip": "38",
+            "length": "44",
+            "sleeveLength": "25"
+          }
+        ],
+        "Skirt": [
+          {
+            "id": 10,
+            "waist": "28",
+            "length": "24",
+            "hip": "38"
+          }
+        ]
+      },
+      "orders": [
+        {
+          "orderId": 104,
+          "date": "2024-10-15",
+          "items": [
+            {
+              "type": "Dress",
+              "quantity": 1
+            }
+          ],
+          "totalAmount": 120,
+          "paymentStatus": "Paid"
+        }
+      ]
+    },
+    {
+      "id": "cbef",
+      "name": "charan",
+      "phone": "8790973996",
+      "gender": "Male",
+      "measurements": {
+        "deded": [
+          {
+            "label": "Shoulder",
+            "value": "00.0",
+            "unit": "cm"
+          },
+          {
+            "label": "Arm Hole",
+            "value": "00.0",
+            "unit": "cm"
+          },
+          {
+            "label": "Chest",
+            "value": "00.0",
+            "unit": "cm"
+          },
+          {
+            "label": "Sleeve",
+            "value": "00.0",
+            "unit": "cm"
+          },
+          {
+            "label": "Wrist",
+            "value": "00.0",
+            "unit": "cm"
+          },
+          {
+            "label": "Waist",
+            "value": "00.0",
+            "unit": "cm"
+          },
+          {
+            "label": "Hip",
+            "value": "00.0",
+            "unit": "cm"
+          },
+          {
+            "label": "Bottom",
+            "value": "00.0",
+            "unit": "cm"
+          },
+          {
+            "label": "Knee",
+            "value": "00.0",
+            "unit": "cm"
+          },
+          {
+            "label": "Ankle",
+            "value": "00.0",
+            "unit": "cm"
+          }
+        ],
+        "hrlk": [
+          {
+            "label": "Shoulder",
+            "value": "00.0",
+            "unit": "cm"
+          },
+          {
+            "label": "Arm Hole",
+            "value": "00.0",
+            "unit": "cm"
+          },
+          {
+            "label": "Chest",
+            "value": "00.0",
+            "unit": "cm"
+          },
+          {
+            "label": "Sleeve",
+            "value": "00.0",
+            "unit": "cm"
+          },
+          {
+            "label": "Wrist",
+            "value": "00.0",
+            "unit": "cm"
+          },
+          {
+            "label": "Waist",
+            "value": "00.0",
+            "unit": "cm"
+          },
+          {
+            "label": "Hip",
+            "value": "00.0",
+            "unit": "cm"
+          },
+          {
+            "label": "Bottom",
+            "value": "00.0",
+            "unit": "cm"
+          },
+          {
+            "label": "Knee",
+            "value": "00.0",
+            "unit": "cm"
+          },
+          {
+            "label": "Ankle",
+            "value": "00.0",
+            "unit": "cm"
+          }
+        ],
+        "toper": [
+          {
+            "label": "Shoulder",
+            "value": "00.0",
+            "unit": "cm"
+          },
+          {
+            "label": "Arm Hole",
+            "value": "00.0",
+            "unit": "cm"
+          },
+          {
+            "label": "Chest",
+            "value": "00.0",
+            "unit": "cm"
+          },
+          {
+            "label": "Sleeve",
+            "value": "00.0",
+            "unit": "cm"
+          },
+          {
+            "label": "Wrist",
+            "value": "00.0",
+            "unit": "cm"
+          },
+          {
+            "label": "Waist",
+            "value": "00.0",
+            "unit": "cm"
+          },
+          {
+            "label": "Hip",
+            "value": "00.0",
+            "unit": "cm"
+          },
+          {
+            "label": "Bottom",
+            "value": "00.0",
+            "unit": "cm"
+          },
+          {
+            "label": "Knee",
+            "value": "00.0",
+            "unit": "cm"
+          },
+          {
+            "label": "Ankle",
+            "value": "00.0",
+            "unit": "cm"
+          }
+        ]
+      }
+    },
+    {
+      "id": "3fd9",
+      "name": "vennela",
+      "phone": "6303404327",
+      "gender": "Male",
+      "measurements": {}
+    },
+    {
+      "id": "58da",
+      "name": "vennilu",
+      "phone": "7676763738",
+      "gender": "Female",
+      "measurements": {}
+    }
+  ]
+}

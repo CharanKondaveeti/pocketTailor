@@ -1,0 +1,70 @@
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure the popup is above other elements */
+}
+
+.popup-content {
+  background: white; /* White background for the popup */
+  border-radius: 8px; /* Rounded corners */
+  padding: 20px; /* Space inside the popup */
+  width: 80%; /* Responsive width */
+  max-width: 500px; /* Maximum width */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Shadow effect */
+  position: relative; /* For absolute positioning of close button */
+}
+
+.popup-content h2 {
+  margin: 0 0 15px; /* Margin below the title */
+}
+
+.popup-content h3 {
+  margin: 10px 0 5px; /* Margin above and below the category title */
+}
+
+.popup-content ul {
+  list-style-type: none; /* Remove default list styles */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
+}
+
+.popup-content li {
+  padding: 10px; /* Space inside each list item */
+  cursor: pointer; /* Change cursor to pointer for clickable items */
+  transition: background 0.3s; /* Smooth background transition */
+}
+
+.popup-content li:hover {
+  background: #f0f0f0; /* Light gray background on hover */
+}
+
+.popup-content button {
+  background: #007bff; /* Blue background for the close button */
+  color: white; /* White text color */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 15px; /* Space inside the button */
+  cursor: pointer; /* Change cursor to pointer */
+  margin-top: 15px; /* Space above the button */
+}
+
+.popup-content button:hover {
+  background: #0056b3; /* Darker blue on hover */
+}
+
+.popup-content h3 {
+  margin: 10px 0; /* Margin above and below the category title */
+  cursor: pointer; /* Show pointer cursor to indicate it's clickable */
+  transition: color 0.3s; /* Smooth color transition */
+}
+
+.popup-content h3:hover {
+  color: #007bff; /* Change color on hover */
+}
