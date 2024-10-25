@@ -15,7 +15,7 @@ import Dashboard from "./features/Dashboard/Dashboard";
 import MeasurementsInput from "./features/AddMesaurements";
 import Experiments from "./Experiments";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import Loginregister from "./pages/LoginRegister.css/LoginRegister";
+import Loginregister from "./features/LoginRegister.css/LoginRegister";
 
 const queryClient = new QueryClient();
 

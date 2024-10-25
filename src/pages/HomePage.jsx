@@ -11,7 +11,7 @@ const HomePage = () => {
         style={{ listStyle: "none", display: "flex", flexDirection: "column" }}
         className="features"
       >
-        <li>
+        {/* <li>
           <NavLink to="/measurements">Measurements</NavLink>
         </li>
         <li>
@@ -25,7 +25,7 @@ const HomePage = () => {
         </li>
         <li>
           <NavLink to="/choosecustomer">view</NavLink>
-        </li>
+        </li> */}
         <li></li>
       </ul>
 
