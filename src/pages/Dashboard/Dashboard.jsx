@@ -13,7 +13,7 @@ const Dashboard = () => {
 
     
     const handleCustomers = () => {
-        navigate('/view');
+        navigate('/viewcustomers');
     };
 
     const handleLogout = () => {

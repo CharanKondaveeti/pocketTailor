@@ -4,14 +4,15 @@ import Login from "./pages/Login";
 import HomePage from "./pages/HomePage";
 import Profile from "./pages/Profile/Profile";
 import OrderPage from "./pages/OrderPage/OrderPage";
-import ViewCustomers from "./pages/ViewCustomers/ViewCustomers";
+
 import AddClient from "./pages/AddClient/AddClient";
 import Dashboard from "./pages/Dashboard/Dashboard";
-
+import Viewcustomers from "./pages/ViewCustomers/Viewcustomers";
 import MeasurementsInput from "./pages/MeasurementsInput";
 import Experiments from "./Experiments";
 import Loginregister from "./pages/LoginRegister.css/LoginRegister";
-
+import View from "./pages/View/View";
+import Billing from "./pages/Billing/Billing";
 const options = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
 
 function App() {
@@ -25,11 +26,13 @@ function App() {
          <Route path="/order" element={<OrderPage/>}/>
          <Route path="/dashboard" element={<Dashboard/>}/>
          <Route path="/login" element={<Loginregister/>}/>
-
-          <Route path="/view" element={<ViewCustomers />} />
+         <Route path="/view" element={<View/>} />
+          <Route path="/viewcustomers" element={<Viewcustomers />} />
           <Route path="/add-client" element={<AddClient />} />
           <Route path="/measurements" element={<MeasurementsInput />} />
           <Route path="/exp" element={<Experiments options={options} />} />
+          <Route path="/billing" element={<Billing />} />
+          
 
         </Routes>
       </div>

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Viewcustomers.css';
+import './View.css';
 
-const Viewcustomers = () => {
+const View = () => {
   const [customers, setCustomers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
@@ -35,10 +35,10 @@ const Viewcustomers = () => {
     setCustomers(jsonData);
   }, []);
 
- 
+  const AddClient = () => navigate('/add-client');
 
   const handleCustomerSelect = (customer) => {
-    navigate('/profile', {
+    navigate('/order', {
       state: {
         userName: customer.name,
         phoneNumber: customer.phone,
@@ -63,7 +63,7 @@ const Viewcustomers = () => {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-     
+        <button onClick={AddClient}>+ Add Client</button>
       </div>
 
       <table>
@@ -89,7 +89,7 @@ const Viewcustomers = () => {
             ))
           ) : (
             <tr>
-              <td colSpan="3">No matching customers found. </td>
+              <td colSpan="3">No matching customers found. Click on Add Client.</td>
             </tr>
           )}
         </tbody>
@@ -98,7 +98,7 @@ const Viewcustomers = () => {
   );
 };
 
-export default Viewcustomers;
+export default View;
 
 
 

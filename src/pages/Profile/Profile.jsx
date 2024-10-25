@@ -2,12 +2,14 @@ import React from 'react'
 import { FaRulerCombined, FaClipboardList,FaFileInvoiceDollar } from 'react-icons/fa';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import './Profile.css';
-import { useNavigate } from 'react-router-dom';
-function Profile() {
+import { useNavigate, useLocation } from 'react-router-dom'; 
+const Profile=()=>{
     const navigate=useNavigate();
+    const { state } = useLocation();
     const back=()=>{
         navigate(-1);
     }
+    const { userName, phoneNumber } = state || {};
   return (
     <div className='profile-container'>
         <div className='top'>
@@ -27,9 +29,8 @@ function Profile() {
                 </div>
            
             <div className='personal-info'>
-                <h2>potla vennela</h2>
-                <p>6303780859</p>
-                <p>vennela@gmail.com</p>
+            <p><strong>Name:</strong> {userName || 'N/A'}</p>
+            <p><strong>Phone:</strong> {phoneNumber || 'N/A'}</p>
             </div>
            
         </div>
