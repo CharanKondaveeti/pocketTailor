@@ -16,53 +16,55 @@ import MeasurementsInput from "./features/AddMesaurements";
 import Experiments from "./Experiments";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Loginregister from "./features/LoginRegister";
+import Main from "./pages/Main";
 
 const queryClient = new QueryClient();
-
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Dashboard />,
-  },
-  {
-    path: "/addorder",
-    element: <AddOrder />,
-  },
-  {
-    path: "/login",
-    element: <Loginregister />,
-  },
-  {
-    path: "/profile",
-    element: <Profile />,
-  },
-  {
-    path: "/addmeasurements",
-    element: <MeasurementsInput />,
-  },
-  // {
-  //   path: "/billing",
-  //   element: <Billing />,
-  // },
-  {
-    path: "/order",
-    element: <OrderPage />,
-  },
-  {
-    path: "/choosecustomer",
-    element: <ViewCustomers />,
-  },
-  // {
-  //   path: "/view",
-  //   element: <View />,
-  // },
-  {
-    path: "/add-client",
-    element: <AddClient />,
-  },
-  {
-    path: "/exp",
-    element: <Experiments />,
+    element: <Main />,
+    children: [
+      {
+        index: true,
+        element: <Navigate to="/homepage" />,
+      },
+      {
+        path: "homepage",
+        element: <Dashboard />,
+      },
+      {
+        path: "addorder",
+        element: <AddOrder />,
+      },
+      {
+        path: "login",
+        element: <Loginregister />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
+      },
+      {
+        path: "addmeasurements",
+        element: <MeasurementsInput />,
+      },
+      {
+        path: "order",
+        element: <OrderPage />,
+      },
+      {
+        path: "choosecustomer",
+        element: <ViewCustomers />,
+      },
+      {
+        path: "add-client",
+        element: <AddClient />,
+      },
+      {
+        path: "exp",
+        element: <Experiments />,
+      },
+    ],
   },
 ]);
 

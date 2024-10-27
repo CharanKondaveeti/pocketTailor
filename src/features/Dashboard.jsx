@@ -9,6 +9,7 @@ import {
 } from "react-icons/fa";
 import "./css/Dashboard.css";
 import { useNavigate } from "react-router-dom";
+import { FaPlus } from "react-icons/fa6";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -31,6 +32,11 @@ const Dashboard = () => {
   const handleListChange = (listType) => {
     setActiveList(listType);
   };
+
+  function whenCardClicked(route) {
+    console.log(route);
+    navigate(`/${route}`);
+  }
 
   // Render items based on activeList
   const renderList = () => {
@@ -74,9 +80,15 @@ const Dashboard = () => {
           </div>
         </div>
       </header>
-
-      <h2>Services</h2>
       <div className="services-cards">
+        <div
+          className="service-EachCard"
+          onClick={() => whenCardClicked("addorder")}
+        >
+          <FaPlus className="card-icon" />
+          <h3>add order</h3>
+        </div>
+
         <div className="service-EachCard">
           <FaUsers className="card-icon" />
           <h3>Customers</h3>
@@ -92,26 +104,13 @@ const Dashboard = () => {
           <h3>Products</h3>
         </div>
       </div>
-
-      {/* <div className="cards-container">
-        <div className="card indigo-card">
-          <FaShoppingCart className="card-icon" />
-          <h2>Take New Order</h2>
-          <p>Start a new order quickly and easily</p>
-          <button className="order-button" onClick={handleOrders}>
-            Take Order
-          </button>
-        </div>
-      </div> */}
-
       {/* Options Section */}
       <div className="options-container">
         <button onClick={() => handleListChange("urgent")}>Urgent</button>
         <button onClick={() => handleListChange("active")}>Active</button>
         <button onClick={() => handleListChange("completed")}>Completed</button>
-        <button onClick={() => handleListChange("canceled")}>Canceled</button>
+        {/* <button onClick={() => handleListChange("canceled")}>Canceled</button> */}
       </div>
-
       {/* Render List Section */}
       <div className="list-container">{renderList()}</div>
     </section>

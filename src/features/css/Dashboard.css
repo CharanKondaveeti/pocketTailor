@@ -51,14 +51,18 @@
   height: 100%;
   padding: 1rem 0;
   border-radius: 11px;
+  gap: 0.8rem;
+  cursor: pointer;
 }
 
-.service-EachCard:nth-child(3) {
-  grid-column: 3/-1;
+.service-EachCard:nth-child(1) {
+  background-color: transparent;
+  border: 2px solid #4a90e2;
 }
 
 .service-EachCard > h3 {
   font-size: 1.2rem;
+  font-weight: 400;
 }
 
 .cards-container {
@@ -86,6 +90,10 @@
 }
 .dashboard-container {
   padding: 20px;
+}
+
+.dashboard-header {
+  margin-bottom: 3rem;
 }
 
 .dashboard-header .bar {
@@ -138,11 +146,6 @@
   background-color: #f3f3f3;
   width: calc(33.33% - 20px);
   text-align: center;
-}
-
-.card-icon {
-  font-size: 40px;
-  margin-bottom: 10px;
 }
 
 .order-button,

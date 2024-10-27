@@ -29,6 +29,27 @@ body {
   padding: 3rem 2rem 0rem 2rem !important;
 }
 
+.main-app {
+  height: 100vh;
+}
+
+.Bottom-controls {
+  height: 5rem;
+  width: 100%;
+  position: fixed;
+  bottom: 0%;
+
+  display: flex;
+  justify-content: space-around;
+  background-color: #f9f9f9;
+
+  align-items: center;
+}
+
+.Bottom-controls > span > svg {
+  font-size: 2.6rem;
+}
+
 /* headings */
 
 .heading-primary {
