@@ -6,7 +6,6 @@ import {
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./App.css";
 
-
 import AddOrder from "./pages/AddOrder";
 import Profile from "./features/Profile";
 import OrderPage from "./pages/OrderPage";
@@ -41,10 +40,10 @@ const router = createBrowserRouter([
     path: "/addmeasurements",
     element: <MeasurementsInput />,
   },
-  {
-    path: "/billing",
-    element: <Billing />,
-  },
+  // {
+  //   path: "/billing",
+  //   element: <Billing />,
+  // },
   {
     path: "/order",
     element: <OrderPage />,
@@ -53,10 +52,10 @@ const router = createBrowserRouter([
     path: "/choosecustomer",
     element: <ViewCustomers />,
   },
-  {
-    path: "/view",
-    element: <View />,
-  },
+  // {
+  //   path: "/view",
+  //   element: <View />,
+  // },
   {
     path: "/add-client",
     element: <AddClient />,
@@ -73,7 +72,6 @@ function App() {
       <RouterProvider router={router} />;
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
-
   );
 }
 
