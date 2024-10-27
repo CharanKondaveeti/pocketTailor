@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import './LoginRegister.css';
-import { useNavigate } from 'react-router-dom'; 
+import React, { useState } from "react";
+import "./css/LoginRegister.css";
+import { useNavigate } from "react-router-dom";
 
 const LoginRegister = () => {
   const [isRegister, setIsRegister] = useState(true);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '', 
-    password: '',
-    confirmPassword: '',
-    loginName: '',
-    loginPassword: ''
+    name: "",
+    email: "",
+    phone: "",
+    password: "",
+    confirmPassword: "",
+    loginName: "",
+    loginPassword: "",
   });
 
   const handleChange = (e) => {
@@ -21,8 +21,8 @@ const LoginRegister = () => {
   const navigate = useNavigate();
   const handleLogin = (e) => {
     e.preventDefault();
-  
-    navigate('/dashboard');
+
+    navigate("/dashboard");
   };
   return (
     <div className="container">
@@ -35,16 +35,24 @@ const LoginRegister = () => {
           />
           <div className="login-header-text">
             <h1>Pocket Tailor</h1>
-            <p className="login-slogan">..."Sew with love, stitch with care."</p>
+            <p className="login-slogan">
+              ..."Sew with love, stitch with care."
+            </p>
           </div>
         </div>
       </header>
 
       <div className="toggle">
-        <button onClick={() => setIsRegister(true)} className={isRegister ? 'active' : ''}>
+        <button
+          onClick={() => setIsRegister(true)}
+          className={isRegister ? "active" : ""}
+        >
           Register
         </button>
-        <button onClick={() => setIsRegister(false)} className={!isRegister ? 'active' : ''}>
+        <button
+          onClick={() => setIsRegister(false)}
+          className={!isRegister ? "active" : ""}
+        >
           Login
         </button>
       </div>
@@ -114,7 +122,9 @@ const LoginRegister = () => {
               onChange={handleChange}
               required
             />
-            <button type="submit" onClick={handleLogin}>Login</button>
+            <button type="submit" onClick={handleLogin}>
+              Login
+            </button>
           </form>
         )}
       </div>

@@ -1,0 +1,27 @@
+.input {
+  border: 1px solid #ccc;
+  border-radius: 130px;
+  margin-bottom: 2rem;
+  padding: 0rem 1.8rem;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+
+.input > svg {
+  font-size: 2rem;
+}
+
+.input > input {
+  border: none;
+  font-size: 1.4rem;
+  width: 100%;
+  background-color: transparent;
+  padding: 1.5rem 0rem;
+}
+
+.input > input:focus {
+  outline: none;
+}

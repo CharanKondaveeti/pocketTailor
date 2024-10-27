@@ -1,4 +1,4 @@
-import ChooseCustomer from "../features/ViewCustomers/ChooseCustomer";
+import ChooseCustomer from "../features/ChooseCustomer";
 
 export default function AddOrder() {
   return (

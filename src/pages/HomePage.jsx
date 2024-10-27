@@ -10,26 +10,10 @@ const HomePage = () => {
       <ul
         style={{ listStyle: "none", display: "flex", flexDirection: "column" }}
         className="features"
-      >
-        {/* <li>
-          <NavLink to="/measurements">Measurements</NavLink>
-        </li>
-        <li>
-          <NavLink to="/profile">profile</NavLink>
-        </li>
-        <li>
-          <NavLink to="/order">order</NavLink>
-        </li>
-        <li>
-          <NavLink to="/dashboard">dashboard</NavLink>
-        </li>
-        <li>
-          <NavLink to="/choosecustomer">view</NavLink>
-        </li> */}
-        <li></li>
-      </ul>
+      ></ul>
 
       <NavLink to="/addorder">addorder</NavLink>
+      <NavLink to="/add-client">addcustomer</NavLink>
     </div>
   );
 };

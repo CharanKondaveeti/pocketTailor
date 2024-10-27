@@ -1,0 +1,83 @@
+/* AddCustomer.css */
+
+.client-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.gender-selection {
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.gender-label {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.submit-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.submit-button button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 500px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-button button:hover {
+  background-color: #0056b3;
+}
+
+.error {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* react-select specific styles */
+
+.css-yk16xz-control {
+  /* Removes the default box shadow */
+  box-shadow: none !important;
+  border: 2px solid #007bff;
+  border-radius: 5px;
+}
+
+.css-1pahdxg-control {
+  /* Focused state styling */
+  border-color: #0056b3 !important;
+  box-shadow: none !important;
+}
+
+.css-26l3qy-menu {
+  /* Dropdown menu styling */
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.css-1n7v3ny-option {
+  /* Option styling */
+  transition: background-color 0.3s;
+}
+
+.css-1n7v3ny-option:hover {
+  background-color: #cce5ff;
+  color: #0056b3;
+}
+
+.css-1n7v3ny-option--is-selected {
+  /* Selected option styling */
+  background-color: #007bff !important;
+  color: white !important;
+}

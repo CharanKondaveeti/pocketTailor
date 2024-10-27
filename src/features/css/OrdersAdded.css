@@ -1,0 +1,45 @@
+.orders-added > h2 {
+  /* padding: 1rem; */
+  margin-bottom: 1rem;
+  font-weight: 500 !important;
+  font-size: 1.6rem;
+}
+
+.orderBrief {
+  font-family: "Inter", sans-serif;
+  display: flex;
+  justify-content: space-between;
+
+  border: 1px solid #ced4dac0;
+  border-radius: 9px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.orderBrief > div {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.orderBrief > p {
+  font-weight: 500;
+  font-size: 1.8rem;
+  padding: 1rem;
+}
+
+.edit-order {
+  background-color: blueviolet;
+  padding: 0 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-order > svg {
+  color: white;
+}

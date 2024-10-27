@@ -1,23 +1,49 @@
-export const fetchCustomers = async () => {
-  const response = await fetch("http://localhost:8000/customers");
-  if (!response.ok) {
-    throw new Error("Network response was not ok");
-  }
-  return response.json();
-};
+import supabase from "./supabase";
 
-export const addCustomer = async (newClient) => {
-  const response = await fetch("http://localhost:8000/customers", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(newClient),
-  });
+export async function getCustomers() {
+  let { data, error } = await supabase.from("customers").select("*");
 
-  if (!response.ok) {
-    throw new Error("Network response was not ok");
+  if (error) {
+    console.error("custommers not found");
+    throw new Error("customers could not be loaded");
   }
 
-  return response.json();
-};
+  return data;
+}
+
+export async function addCustomer(newCustomer) {
+  const { data, error } = await supabase
+    .from("customers")
+    .insert([newCustomer]);
+
+  if (error) {
+    console.error("customer insertion failed");
+    throw new Error("customer insertion failed");
+  }
+}
+
+export async function getMeasurements(customerId) {
+  const { data, error } = await supabase
+    .from("Measurements")
+    .select("id, category, data")
+    .eq("customerId", customerId);
+
+  if (error) {
+    console.error("Measurements not found");
+    throw new Error("Measurements not found");
+  }
+  return data;
+}
+
+export async function confirmOrders(allOrders) {
+  const { data, error } = await supabase
+    .from("orders")
+    .insert(allOrders)
+    .select();
+
+  if (error) {
+    console.error("not ordered");
+    throw new Error("not ordered");
+  }
+  return data;
+}

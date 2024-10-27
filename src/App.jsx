@@ -7,26 +7,22 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./App.css";
 import HomePage from "./pages/HomePage";
 import AddOrder from "./pages/AddOrder";
-import Profile from "./features/Profile/Profile";
-import OrderPage from "./features/OrderPage/OrderPage";
-import ViewCustomers from "./features/ViewCustomers/ChooseCustomer";
-import AddClient from "./features/AddClient/AddCustomer";
-import Dashboard from "./features/Dashboard/Dashboard";
+import Profile from "./features/Profile";
+import OrderPage from "./pages/OrderPage";
+import ViewCustomers from "./features/ChooseCustomer";
+import AddClient from "./features/AddCustomer";
+import Dashboard from "./features/Dashboard";
 import MeasurementsInput from "./features/AddMesaurements";
 import Experiments from "./Experiments";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import Loginregister from "./features/LoginRegister.css/LoginRegister";
+import Loginregister from "./features/LoginRegister";
 
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Navigate to="/homepage" />,
-  },
-  {
-    path: "/homepage",
-    element: <HomePage />,
+    element: <Dashboard />,
   },
   {
     path: "/addorder",
@@ -47,10 +43,6 @@ const router = createBrowserRouter([
   {
     path: "/order",
     element: <OrderPage />,
-  },
-  {
-    path: "/dashboard",
-    element: <Dashboard />,
   },
   {
     path: "/choosecustomer",
