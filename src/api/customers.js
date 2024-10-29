@@ -80,3 +80,20 @@ export async function validateCredentials({ name, password }) {
 
   return data[0];
 }
+
+export async function addTailor(tailor) {
+  const { data, error } = await supabase
+    .from("tailors")
+    .insert({ username: tailor.name, password: tailor.password })
+    .select();
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  if (data.length === 0) {
+    throw new Error("Invalid credentials");
+  }
+
+  return data[0];
+}

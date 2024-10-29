@@ -36,7 +36,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Navigate to="/homepage" />,
+        element: <Navigate to="/login" />,
       },
       {
         path: "homepage",
@@ -80,12 +80,14 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  // const [selectedCustomer, setSelectedCustomer] = useState({});
+  const [selectedCustomer, setSelectedCustomer] = useState({});
   const [tailor, setTailor] = useState({});
 
   return (
     <QueryClientProvider client={queryClient}>
-      <PostContext.Provider value={{ tailor, setTailor }}>
+      <PostContext.Provider
+        value={{ tailor, setTailor, selectedCustomer, setSelectedCustomer }}
+      >
         <RouterProvider router={router} />
         <ReactQueryDevtools initialIsOpen={false} />
       </PostContext.Provider>

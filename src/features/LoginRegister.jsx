@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./css/LoginRegister.css";
 import { useNavigate } from "react-router-dom";
-import { Mutation, QueryClient, useMutation } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { validateCredentials } from "../api/customers";
 import { useContext } from "react";
 import { PostContext } from "../App";
+import { addTailor } from "../api/customers";
 
 const LoginRegister = () => {
   const { setTailor } = useContext(PostContext);
@@ -27,7 +28,6 @@ const LoginRegister = () => {
   const verify = useMutation({
     mutationFn: validateCredentials,
     onSuccess: (data) => {
-      console.log(data);
       localStorage.setItem("tailorData", JSON.stringify(data));
       setTailor(data);
       navigate("/homepage");
@@ -37,9 +37,28 @@ const LoginRegister = () => {
     },
   });
 
+  const register = useMutation({
+    mutationFn: addTailor,
+    onSuccess: (data) => {
+      setIsRegister(false);
+      console.log({ ...data, password: "" });
+      setFormData({ ...data, password: "" });
+    },
+    onError: (error) => {
+      console.error("Error registering:", error);
+    },
+  });
+
   const handleLogin = (e) => {
     e.preventDefault();
     verify.mutate(formData);
+  };
+
+  const whenRegisterClicked = (e) => {
+    e.preventDefault();
+    console.log(formData);
+
+    register.mutate(formData);
   };
 
   const navigate = useNavigate();
@@ -78,7 +97,7 @@ const LoginRegister = () => {
 
       <div className="form-container">
         {isRegister ? (
-          <form className="form">
+          <form className="form" onSubmit={whenRegisterClicked}>
             <h2>Register</h2>
             <input
               type="text"
@@ -88,22 +107,22 @@ const LoginRegister = () => {
               onChange={handleChange}
               required
             />
-            <input
+            {/* <input
               type="email"
               name="email"
               placeholder="Email"
               value={formData.email}
               onChange={handleChange}
               required
-            />
-            <input
+            /> */}
+            {/* <input
               type="tel"
               name="phone"
               placeholder="Phone Number"
               value={formData.phone}
               onChange={handleChange}
               required
-            />
+            /> */}
             <input
               type="password"
               name="password"
@@ -120,7 +139,14 @@ const LoginRegister = () => {
               onChange={handleChange}
               required
             />
-            <button type="submit">Register</button>
+            <button
+              type="submit"
+              // onClick={() => {
+              //   whenRegisterClicked;
+              // }}
+            >
+              Register
+            </button>
           </form>
         ) : (
           <form className="form">
@@ -129,7 +155,7 @@ const LoginRegister = () => {
               type="text"
               name="name"
               placeholder="Name"
-              value={formData.loginName}
+              value={formData.name}
               onChange={handleChange}
               required
             />
@@ -137,7 +163,7 @@ const LoginRegister = () => {
               type="password"
               name="password"
               placeholder="Password"
-              value={formData.loginPassword}
+              value={formData.password}
               onChange={handleChange}
               required
             />
