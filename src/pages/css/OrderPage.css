@@ -185,3 +185,62 @@ button:hover {
   display: flex;
   gap: 5rem;
 }
+
+.showcase--measurement {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: auto;
+}
+
+.showcase--measurement h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.showcase--measurement ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.showcase--measurement li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 1rem;
+  color: #555;
+}
+
+.showcase--measurement li:last-child {
+  border-bottom: none;
+}
+
+.showcase--measurement li span:first-child {
+  font-weight: 500;
+  color: #555;
+}
+
+.showcase--measurement li span:last-child {
+  font-weight: 400;
+  color: #333;
+}
+
+.showcase--measurement li span {
+  display: inline-block;
+}
+
+.showcase--measurement li:hover {
+  background-color: #f1f1f1;
+}

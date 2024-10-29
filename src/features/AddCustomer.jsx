@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { FaUser, FaPhone } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Select from "react-select";
@@ -33,10 +32,12 @@ const AddCustomer = () => {
     },
   });
 
+  const tailorData = JSON.parse(localStorage.getItem("tailorData"));
   const handleFormSubmit = (event) => {
     event.preventDefault();
 
     const newClient = {
+      tailorId: tailorData?.id,
       name: clientName,
       phone: phoneNumber,
       gender: gender?.value,

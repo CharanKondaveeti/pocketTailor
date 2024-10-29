@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from "react";
-
 import {
   FiPlus,
   FiArrowLeft,
@@ -9,8 +8,6 @@ import {
 } from "react-icons/fi";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { useNavigate, useLocation } from "react-router-dom";
-
-// Image imports
 import ankle from "./../assets/measurementIcons/ankle.png";
 import bottom from "./../assets/measurementIcons/bottom.png";
 import chest from "./../assets/measurementIcons/chest.png";
@@ -18,8 +15,9 @@ import hip from "./../assets/measurementIcons/hip.png";
 import knee from "./../assets/measurementIcons/knee.png";
 import shoulder from "./../assets/measurementIcons/shoulder.png";
 import waist from "./../assets/measurementIcons/waist.png";
-
 import "./css/MeasurementsInput.css";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { addMeasurement } from "../api/customers";
 
 const wholeNumberOptions = Array.from({ length: 101 }, (_, i) =>
   i < 10 ? `0${i}` : `${i}`
@@ -29,12 +27,13 @@ const decimalOptions = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 const AddMeasurements = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const { customerId } = location.state || {};
 
-  const { customerId } = location.state;
-
+  const [measurementName, setMeasurementName] = useState("");
   const [fields, setFields] = useState([
     { label: "Shoulder", image: shoulder, value: "00.0", isNew: false },
-    { label: "Arm Hole", image: hip, value: "00.0", isNew: false },
+    { label: "ArmHole", image: hip, value: "00.0", isNew: false },
     { label: "Chest", image: chest, value: "00.0", isNew: false },
     { label: "Sleeve", image: shoulder, value: "00.0", isNew: false },
     { label: "Wrist", image: ankle, value: "00.0", isNew: false },
@@ -47,82 +46,51 @@ const AddMeasurements = () => {
 
   const [menuOpen, setMenuOpen] = useState(null);
   const [selectedFieldIndex, setSelectedFieldIndex] = useState(null);
-  const [measurementName, setMeasurementName] = useState("");
   const [unit, setUnit] = useState("cm");
 
   const newFieldInputRef = useRef(null);
 
-  // Fetch existing customer data
-  useEffect(() => {
-    const fetchCustomerData = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:8000/customers/${customerId}`
-        );
-        if (!response.ok) throw new Error("Failed to fetch customer data.");
-        const customer = await response.json();
+  const whenGivingInput = (e, index) => {
+    const { value } = e.target;
+    setFields((prevFields) =>
+      prevFields.map((field, i) => (i === index ? { ...field, value } : field))
+    );
+  };
 
-        // Check if customer has measurements and it's an array
-        const fetchedMeasurements = Array.isArray(customer.measurements)
-          ? customer.measurements
-          : [];
+  const confirmOrdersMutation = useMutation({
+    mutationFn: addMeasurement,
+    onSuccess: () => {
+      queryClient.invalidateQueries("measurements");
+      navigate("/order", {
+        state: { customerId },
+      });
+    },
+    onError: (error) => {
+      console.error("Order submission failed:", error);
+    },
+  });
 
-        setFields(
-          fetchedMeasurements.length > 0 ? fetchedMeasurements : fields
-        );
-      } catch (error) {
-        console.error("Error fetching customer data:", error);
-      }
-    };
-
-    fetchCustomerData();
-  }, [customerId]);
-
-  const handleSubmit = async () => {
-    // Fetch the existing customer data
-    let existingCustomerData;
-    try {
-      const response = await fetch(
-        `http://localhost:8000/customers/${customerId}`
-      );
-      if (!response.ok) throw new Error("Failed to fetch customer data.");
-      existingCustomerData = await response.json();
-    } catch (error) {
-      console.error("Error fetching customer data:", error);
-      return; // Exit if there's an error
-    }
-
-    // Create a new object to hold merged measurements
-    const updatedMeasurements = {
-      ...existingCustomerData.measurements, // Spread existing measurements
-      [measurementName]: fields.map((field) => ({
-        label: field.label,
-        value: field.value,
-        unit,
+  const whenSubmitClicked = () => {
+    const finalData = {
+      customerId,
+      category: measurementName,
+      data: fields.map((field) => ({
+        [field.label]: field.value,
       })),
+      units: unit,
     };
+    confirmOrdersMutation.mutate(finalData);
+  };
 
-    const updatedCustomerData = {
-      measurements: updatedMeasurements,
-    };
-
-    try {
-      const response = await fetch(
-        `http://localhost:8000/customers/${customerId}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedCustomerData),
-        }
-      );
-
-      if (!response.ok) throw new Error("Failed to update measurements.");
-      console.log("Measurements Data submitted:", updatedCustomerData);
-    } catch (error) {
-      console.error("Error submitting measurements:", error);
-    }
+  const toggleUnit = () => {
+    const newUnit = unit === "cm" ? "in" : "cm";
+    setFields(
+      fields.map((field) => ({
+        ...field,
+        value: convertMeasurement(field.value, newUnit),
+      }))
+    );
+    setUnit(newUnit);
   };
 
   const convertMeasurement = (value, toUnit) => {
@@ -138,17 +106,6 @@ const AddMeasurements = () => {
     return `${whole.padStart(2, "0")}.${decimal}`;
   };
 
-  const toggleUnit = () => {
-    const newUnit = unit === "cm" ? "in" : "cm";
-    setFields(
-      fields.map((field) => ({
-        ...field,
-        value: convertMeasurement(field.value, newUnit),
-      }))
-    );
-    setUnit(newUnit);
-  };
-
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (!event.target.closest(".measurements-grid")) {
@@ -159,34 +116,6 @@ const AddMeasurements = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-  useEffect(() => {
-    if (newFieldInputRef.current) newFieldInputRef.current.focus();
-  }, [fields]);
-
-  const handleFieldClick = (index) => setSelectedFieldIndex(index);
-  const handleWholeNumberChange = (value) => {
-    if (selectedFieldIndex !== null) {
-      const newFields = [...fields];
-      const [, decimal] = newFields[selectedFieldIndex].value.split(".");
-      newFields[selectedFieldIndex].value = `${value}.${decimal}`;
-      setFields(newFields);
-    }
-  };
-  const handleDecimalChange = (value) => {
-    if (selectedFieldIndex !== null) {
-      const newFields = [...fields];
-      const [whole] = newFields[selectedFieldIndex].value.split(".");
-      newFields[selectedFieldIndex].value = `${whole}.${value}`;
-      setFields(newFields);
-    }
-  };
-
-  const handleFieldLabelChange = (index, newLabel) => {
-    const newFields = [...fields];
-    newFields[index].label = newLabel;
-    setFields(newFields);
-  };
 
   const addField = () => {
     const newField = {
@@ -200,30 +129,7 @@ const AddMeasurements = () => {
     setSelectedFieldIndex(fields.length);
   };
 
-  const stopEditing = (index) => {
-    const newFields = [...fields];
-    newFields[index].isEditing = false;
-    setFields(newFields);
-  };
-
   const goBack = () => navigate(-1);
-
-  const deleteField = (index) => {
-    setFields(fields.filter((_, i) => i !== index));
-    setSelectedFieldIndex(null);
-    setMenuOpen(null);
-  };
-
-  const editField = (index) => {
-    const newFields = [...fields];
-    newFields[index].isEditing = true;
-    setFields(newFields);
-    setSelectedFieldIndex(index);
-    setMenuOpen(null);
-  };
-
-  const handleMenuClick = (index) =>
-    setMenuOpen(index === menuOpen ? null : index);
 
   return (
     <div className="measurements-container">
@@ -231,7 +137,7 @@ const AddMeasurements = () => {
         <button className="back-button" onClick={goBack}>
           <IoIosArrowRoundBack size={30} />
         </button>
-        <h1 className="heading--primary">measurements</h1>
+        <h1 className="heading--primary">Measurements</h1>
       </div>
       <div className="row-2">
         <input
@@ -252,68 +158,22 @@ const AddMeasurements = () => {
             className={`measurement-field ${
               index === selectedFieldIndex ? "selected" : ""
             }`}
-            onClick={() => handleFieldClick(index)}
           >
             <span className="icon">
               <img src={field.image} alt={`${field.label} icon`} />
             </span>
-            {field.isEditing ? (
-              <input
-                type="text"
-                value={field.label}
-                onChange={(e) => handleFieldLabelChange(index, e.target.value)}
-                onBlur={() => stopEditing(index)}
-                ref={newFieldInputRef}
-              />
-            ) : (
-              <span className="measurement-label">{field.label}</span>
-            )}
+            <span className="measurement-label">{field.label}</span>
             <div className="measurement-value">
               <span className="unit">{unit}</span>
               <input
                 type="number"
+                name={field.label}
                 className="whole-number-input"
                 value={field.value.split(".")[0]}
-                onChange={(e) => handleWholeNumberChange(e.target.value)}
+                onChange={(e) => whenGivingInput(e, index)}
                 min="0"
                 max="99"
               />
-              <select
-                className="decimal-input"
-                value={field.value.split(".")[1]}
-                onChange={(e) => handleDecimalChange(e.target.value)}
-              >
-                {decimalOptions.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-              <button
-                className="menu-button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleMenuClick(index);
-                }}
-              >
-                <FiMoreVertical />
-              </button>
-              {menuOpen === index && (
-                <div className="dropdown-menu">
-                  <button
-                    className="edit-button"
-                    onClick={() => editField(index)}
-                  >
-                    <FiEdit />
-                  </button>
-                  <button
-                    className="delete-button"
-                    onClick={() => deleteField(index)}
-                  >
-                    <FiTrash />
-                  </button>
-                </div>
-              )}
             </div>
           </div>
         ))}
@@ -322,7 +182,7 @@ const AddMeasurements = () => {
         <FiPlus />
       </button>
       <div className="measurements-footer">
-        <button className="submit-button" onClick={handleSubmit}>
+        <button className="submit-button" onClick={whenSubmitClicked}>
           Submit
         </button>
       </div>

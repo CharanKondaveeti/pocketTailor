@@ -9,7 +9,7 @@ import "./App.css";
 import AddOrder from "./pages/AddOrder";
 import Profile from "./features/Profile";
 import OrderPage from "./pages/OrderPage";
-import ViewCustomers from "./features/ChooseCustomer";
+import ChooseCustomer from "./features/ChooseCustomer";
 import AddClient from "./features/AddCustomer";
 import Dashboard from "./features/Dashboard";
 import MeasurementsInput from "./features/AddMesaurements";
@@ -17,8 +17,18 @@ import Experiments from "./Experiments";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Loginregister from "./features/LoginRegister";
 import Main from "./pages/Main";
+import { createContext, useState } from "react";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60,
+    },
+  },
+});
+
+export const PostContext = createContext();
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -36,6 +46,7 @@ const router = createBrowserRouter([
         path: "addorder",
         element: <AddOrder />,
       },
+
       {
         path: "login",
         element: <Loginregister />,
@@ -54,7 +65,7 @@ const router = createBrowserRouter([
       },
       {
         path: "choosecustomer",
-        element: <ViewCustomers />,
+        element: <ChooseCustomer />,
       },
       {
         path: "add-client",
@@ -69,10 +80,15 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  // const [selectedCustomer, setSelectedCustomer] = useState({});
+  const [tailor, setTailor] = useState({});
+
   return (
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />;
-      <ReactQueryDevtools initialIsOpen={false} />
+      <PostContext.Provider value={{ tailor, setTailor }}>
+        <RouterProvider router={router} />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </PostContext.Provider>
     </QueryClientProvider>
   );
 }

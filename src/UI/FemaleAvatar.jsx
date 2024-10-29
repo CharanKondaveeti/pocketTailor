@@ -26,7 +26,7 @@ function femaleAvatar() {
   const femaleHairStyles = ["longHair", "shortHair"];
   const bodyTypes = ["checkered", "rounded", "small", "squared"];
 
-  const selectedSeed = seed || getRandomElement(seeds);
+  const selectedSeed = getRandomElement(seeds);
   const backgroundType = getRandomElement(backgroundTypes);
   const backgroundColor = getRandomElement(backgroundColors);
   const clothingColor = getRandomElement(clothingColors);

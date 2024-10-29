@@ -50,6 +50,10 @@ body {
   font-size: 2.6rem;
 }
 
+.workflow {
+  padding-bottom: 5rem;
+}
+
 /* headings */
 
 .heading-primary {

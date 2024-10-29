@@ -12,7 +12,7 @@ const Experiments = ({
   const [isDragging, setIsDragging] = useState(false);
   const [startY, setStartY] = useState(0);
 
-  const itemHeight = 32; // Height of each item in pixels (adjust based on your CSS)
+  const itemHeight = 32;
 
   const handleMouseDown = (event) => {
     event.preventDefault();

@@ -1,20 +1,31 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import TitleBar from "../UI/TitleBar/TitleBar";
 import MeasurementOptions from "../features/MeasurementOptions";
 import OrdersAdded from "../features/OrdersAdded";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import "./css/OrderPage.css";
 import { confirmOrders } from "../api/customers";
 import OrderSuccessful from "../features/OrderSuccessful";
+import { getMeasurements } from "../api/customers";
+import { PostContext } from "../App";
+import { queryOptions } from "@tanstack/react-query";
 
 const OrderPage = () => {
-  const navigate = useNavigate();
   const { state } = useLocation();
+  const { selectedCustomer, setSelectedCustomer } = useContext(PostContext);
+  // const { id:customerId, name:userName, phoneNumber, photo } = state || {};
+  // const { customerId, userName, phoneNumber, photo } = selectedCustomer || {};
+  const {
+    id: customerId,
+    name: userName,
+    phoneNumber,
+    photo,
+  } = JSON.parse(localStorage.getItem("selectedCustomer")) || {};
+
+  const navigate = useNavigate();
   const [orderSucess, setOrderSucess] = useState(false);
-  const { customerId, userName, phoneNumber, photo } = state || {};
-  const [selectedOpt, setSelectedOpt] = useState("");
-  const [selectedID, setSelectedID] = useState(0);
+  const [selectedMeasurement, setSelectedMeasurement] = useState([]);
   const [addOrder, setAddOrder] = useState(true);
   const [allOrders, setAllOrders] = useState([]);
   const [currOrder, setCurrOrder] = useState({
@@ -24,15 +35,36 @@ const OrderPage = () => {
     isPaid: false,
   });
 
+  const {
+    data: measurements = [],
+    error,
+    isLoading,
+  } = useQuery({
+    querykey: ["measurements"],
+    queryFn: () => getMeasurements(customerId),
+  });
+
   const garmentTypes = ["Shirt", "Pants", "Dress", "Skirt"];
 
-  function whenOptionClicked(e, selectedObj) {
-    setCurrOrder({ ...currOrder, ["measurementId"]: selectedObj?.id });
-    setSelectedOpt(selectedObj?.category || "");
-  }
   function whenGivingInput(e) {
     const { name, value } = e.target;
-    setCurrOrder({ ...currOrder, [name]: value });
+
+    if (name === "measurementId" && value === "new") {
+      navigate("/addmeasurements", {
+        state: {
+          customerId,
+        },
+      });
+    } else if (name === "measurementId" && value !== "new") {
+      setCurrOrder({ ...currOrder, [name]: value });
+      const measurementjson = measurements.find((each) => each.id == value);
+
+      if (measurementjson) {
+        setSelectedMeasurement(measurementjson);
+      }
+    } else {
+      setCurrOrder({ ...currOrder, [name]: value });
+    }
   }
 
   function whenSubmitClicked(e) {
@@ -50,7 +82,6 @@ const OrderPage = () => {
   const confirmOrdersMutation = useMutation({
     mutationFn: confirmOrders,
     onSuccess: () => {
-      // navigate("/choosecustomer");
       setOrderSucess(true);
     },
   });
@@ -68,9 +99,6 @@ const OrderPage = () => {
       isPaid: order.isPaid,
       deliveryDate: order.deliveryDate,
     }));
-
-    console.log(formattedOrders);
-
     confirmOrdersMutation.mutate(formattedOrders);
   }
 
@@ -111,12 +139,45 @@ const OrderPage = () => {
                 />
               </div>
 
-              <MeasurementOptions
-                measurementId={currOrder.measurementId}
-                customerId={customerId}
-                onMeasurementChange={whenOptionClicked}
-                selectedOpt={selectedOpt}
-              />
+              <div className="form-group pp">
+                <label>Measurement Option:</label>
+                <select
+                  name="measurementId"
+                  value={currOrder.measurementId}
+                  onChange={whenGivingInput}
+                >
+                  <option value="">Select</option>
+                  <option value="new">➕ Add New</option>
+                  {measurements.map((eachObj) => (
+                    <option key={eachObj.category} value={eachObj.id}>
+                      {eachObj.category}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {selectedMeasurement.length > 0 && (
+                <div className="showcase--measurement">
+                  {selectedMeasurement.category && (
+                    <>
+                      <h4>{selectedMeasurement.category}</h4>
+                      <ul>
+                        {selectedMeasurement.data.map((measurement, index) => (
+                          <>
+                            {Object.entries(measurement).map(([key, value]) => (
+                              <li key={`${index}-${key}`}>
+                                <span>{key}</span>
+                                <span>{value}</span>
+                              </li>
+                            ))}
+                          </>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                </div>
+              )}
+
               <div className="btns">
                 <button onClick={whenSubmitClicked}>Submit Order</button>
                 <button onClick={() => setAddOrder(false)}>back</button>

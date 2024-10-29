@@ -34,7 +34,6 @@ const Dashboard = () => {
   };
 
   function whenCardClicked(route) {
-    console.log(route);
     navigate(`/${route}`);
   }
 

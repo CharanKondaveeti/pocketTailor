@@ -1,14 +1,12 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { MdOutlineArrowBackIosNew } from "react-icons/md";
-import "./css/ViewCustomers.css";
 import { FiUserPlus } from "react-icons/fi";
-import { FaPlus } from "react-icons/fa6";
-
 import { getCustomers } from "../api/customers";
 import TitleBar from "../UI/TitleBar/TitleBar";
 import Input from "../UI/Input/Input";
+import "./css/ViewCustomers.css";
+import { PostContext } from "../App";
 
 function RandomAvatar() {
   const avatarCount = 12;
@@ -23,22 +21,31 @@ function RandomAvatar() {
 }
 
 const ChooseCustomer = () => {
+  const { selectedCustomer, setSelectedCustomer } = useContext(PostContext);
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
+  const tailorId = JSON.parse(localStorage.getItem("tailorData"))?.id;
+  console.log(tailorId);
 
   const {
     data: customers = [],
     error,
     isLoading,
   } = useQuery({
-    queryKey: ["customers"],
-    queryFn: getCustomers,
+    queryKey: ["customers", tailorId],
+    queryFn: () => getCustomers(tailorId),
+    enabled: !!tailorId,
   });
 
   const AddClient = () => navigate("/add-client");
 
+  useEffect(() => {
+    localStorage.removeItem("selectedCustomer");
+  }, []);
+
   const handleCustomerSelect = (customer) => {
-    console.log(customer.photo);
+    localStorage.setItem("selectedCustomer", JSON.stringify(customer));
+    setSelectedCustomer(customer);
     navigate("/order", {
       state: {
         customerId: customer.id,

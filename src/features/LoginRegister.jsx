@@ -1,29 +1,48 @@
 import React, { useState } from "react";
 import "./css/LoginRegister.css";
 import { useNavigate } from "react-router-dom";
+import { Mutation, QueryClient, useMutation } from "@tanstack/react-query";
+import { validateCredentials } from "../api/customers";
+import { useContext } from "react";
+import { PostContext } from "../App";
 
 const LoginRegister = () => {
+  const { setTailor } = useContext(PostContext);
   const [isRegister, setIsRegister] = useState(true);
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    password: "",
-    confirmPassword: "",
-    loginName: "",
-    loginPassword: "",
+    // name: "",
+    // email: "",
+    // phone: "",
+    // password: "",
+    // confirmPassword: "",
+    // loginName: "",
+    // loginPassword: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-  const navigate = useNavigate();
+
+  const verify = useMutation({
+    mutationFn: validateCredentials,
+    onSuccess: (data) => {
+      console.log(data);
+      localStorage.setItem("tailorData", JSON.stringify(data));
+      setTailor(data);
+      navigate("/homepage");
+    },
+    onError: (error) => {
+      console.error("Error adding client:", error);
+    },
+  });
+
   const handleLogin = (e) => {
     e.preventDefault();
-
-    navigate("/dashboard");
+    verify.mutate(formData);
   };
+
+  const navigate = useNavigate();
   return (
     <div className="container">
       <header className="login-app-header">
@@ -108,7 +127,7 @@ const LoginRegister = () => {
             <h2>Login</h2>
             <input
               type="text"
-              name="loginName"
+              name="name"
               placeholder="Name"
               value={formData.loginName}
               onChange={handleChange}
@@ -116,7 +135,7 @@ const LoginRegister = () => {
             />
             <input
               type="password"
-              name="loginPassword"
+              name="password"
               placeholder="Password"
               value={formData.loginPassword}
               onChange={handleChange}
